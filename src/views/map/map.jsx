@@ -8,7 +8,7 @@ import {
   userLocationIcon,
   useStyles,
 } from "../../assets/styles/views/mapStyles";
-import BusMarkerPopup from "../../components/map/busMarkerPopup";
+import BusMarkerPopup from "../../components/map/BusMarkerPopup";
 import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
@@ -43,7 +43,13 @@ export default function Mapa() {
 
   return (
     <div className={classes.root}>
-      <Map animate={true} center={mapCenter} zoom={zoom} className={classes.map} zoomControl={false}>
+      <Map
+        animate={true}
+        center={mapCenter}
+        zoom={zoom}
+        className={classes.map}
+        zoomControl={false}
+      >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -58,7 +64,10 @@ export default function Mapa() {
         ))}
 
         {marcadorUsuario ? (
-          <Marker position={[marcadorUsuario.latitud, marcadorUsuario.longitud]} icon={userLocationIcon} />
+          <Marker
+            position={[marcadorUsuario.latitud, marcadorUsuario.longitud]}
+            icon={userLocationIcon}
+          />
         ) : null}
 
         {(capsBusStopMarkers || []).map((capsBusStopMarker, value) => (
