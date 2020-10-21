@@ -11,6 +11,8 @@ import NotFound from "./views/notFound/NotFound";
 
 export default function App() {
   return (
+    //Alertas que aparecen ej busco cap cercano y no tengo la ubicacion mia
+    //solo uno a la vez
     <SnackbarProvider
       maxSnack={1}
       anchorOrigin={{
@@ -18,6 +20,7 @@ export default function App() {
         horizontal: "right",
       }}
     >
+     {/**Guarda en la cache */}
       <SWRConfig
         value={{
           refreshInterval: 0,

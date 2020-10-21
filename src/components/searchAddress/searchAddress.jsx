@@ -7,12 +7,16 @@ import AutoLocationButton from "../button/AutoLocationButton";
 
 const SearchAddress = () => {
   const classes = useStyles();
+  //TO DO: VER BIEN SETUBICACION, LA PODEMOS VOLAR PASANDOLA POR PARAMETRO A UN METODO
   const { GetUserLocationByAddressAndShowMarker, setUbicacion } = useLocationContext();
 
+  //TO DO: QUE UBICACION Y SETUBICACION SEA LOCAL EN LA CLASE
   const handleInputChange = (event) => {
     setUbicacion(event.target.value);
   };
 
+  //QUE SE MANDE POR PARAMETRO A ESTE METODO (GETUSER------)
+  //CAMBIAR A HANDLEENTERKEYPRESS
   const handleKeyPress = (event) => {
     if (event.which === 13 || event.keyCode === 13) {
       GetUserLocationByAddressAndShowMarker();

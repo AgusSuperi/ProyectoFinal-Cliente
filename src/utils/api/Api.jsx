@@ -33,6 +33,7 @@ export const Get = async (url) => {
   return await fetch(url).then((res) => res.json());
 };
 
+//TO DO: VER QUE CASO CON EL CARTEL DE ERROR, SE VE RARO
 export const fetcher = (...args) =>
   fetch(...args)
     .then((res) => res.json())

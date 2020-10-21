@@ -10,12 +10,15 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
 
+//TO DO: CAMBIAR NOMBRE DE LA CLASE
 export default function CustomizedMenus() {
   const classes = useStyles();
+  //TO DO: VER NOMBRE DE ANCHOREL CAMBIAR A NOMBRE MAS MEJOR
   const [anchorEl, setAnchorEl] = useState(null);
   const { resetMarkers, setDrawerOpen, setFilterPanelOpen, setSelectedCaps, windowWidth } = useCapsContext();
   const { ShowClosestCapsOnMap } = useLocationContext();
 
+  //TO DO: CAMBIAR NOMBRE
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,6 +33,7 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
+  //TO DO: CUANDO PONGO FILTRAR QUE SAQUE EL AGRANDADO DEL MARCADOR DEL CAP QUE ESTABA SELECCIONADO
   const handleShowFilter = () => {
     setFilterPanelOpen(true);
     setSelectedCaps("");

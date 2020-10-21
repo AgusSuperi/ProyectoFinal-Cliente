@@ -68,7 +68,6 @@ export function LocationProvider(props) {
 
   const CreateAndShowUserMarker = (coordenadas) => {
     let marcador = {
-      nombre: "Mi Ubicación",
       latitud: coordenadas.lat,
       longitud: coordenadas.lng,
     };
@@ -89,6 +88,7 @@ export function LocationProvider(props) {
     }
   };
 
+  //TO DO: CAMBIAR A UN ARCHIVO A PARTE
   const GetClosestCapsByUserLocation = (userLocation) => {
     let closestCaps;
     let capsDistance = 100000;

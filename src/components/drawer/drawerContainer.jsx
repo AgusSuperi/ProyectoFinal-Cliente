@@ -9,16 +9,19 @@ import FilterPanel from "../filters/FilterPanel";
 const DrawerContainer = () => {
   const classes = useStyles();
   const { filterPanelOpen, selectedCaps } = useCapsContext();
+  //TO DO: PONER NOMBRE SIGNIFICATIVO A ESTE VALUE, ES EL DEL TAB
   const [value, setValue] = useState(0);
 
   return (
     <div className={classes.drawerContainer}>
       {filterPanelOpen ? (
+        //TO DO: ESTE DIV VA PARA EL COMPONENTE FILTER PANEL
         <div className={classes.filterPanel}>
           <FilterPanel />
         </div>
       ) : undefined}
       {selectedCaps ? (
+        //TO DO: PASAR ESTO A OTRO COMPONENTE
         <div>
           <div className={classes.imageContainer}>
             <img src="/images/hospital.jpg" alt="Foto del CAPS" className={classes.image} />
