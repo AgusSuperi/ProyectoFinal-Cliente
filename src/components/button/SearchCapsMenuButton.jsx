@@ -10,35 +10,39 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
 
-//TO DO: CAMBIAR NOMBRE DE LA CLASE
-export default function CustomizedMenus() {
+export default function SearchCapsMenuButton() {
   const classes = useStyles();
-  //TO DO: VER NOMBRE DE ANCHOREL CAMBIAR A NOMBRE MAS MEJOR
-  const [anchorEl, setAnchorEl] = useState(null);
-  const { resetMarkers, setDrawerOpen, setFilterPanelOpen, setSelectedCaps, windowWidth } = useCapsContext();
+  const [openMenu, setOpenMenu] = useState(null);
+  const {
+    resetMarkers,
+    setDrawerOpen,
+    setFilterPanelOpen,
+    selectedCaps,
+    setSelectedCaps,
+    windowWidth,
+  } = useCapsContext();
   const { ShowClosestCapsOnMap } = useLocationContext();
 
-  //TO DO: CAMBIAR NOMBRE
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenMenu = (event) => {
+    setOpenMenu(event.currentTarget);
   };
 
   const handleShowAllCaps = () => {
     resetMarkers();
-    setAnchorEl(null);
+    setOpenMenu(null);
   };
 
   const handleShowClosestCaps = () => {
     ShowClosestCapsOnMap();
-    setAnchorEl(null);
+    setOpenMenu(null);
   };
 
-  //TO DO: CUANDO PONGO FILTRAR QUE SAQUE EL AGRANDADO DEL MARCADOR DEL CAP QUE ESTABA SELECCIONADO
   const handleShowFilter = () => {
+    selectedCaps.selected = false;
     setFilterPanelOpen(true);
     setSelectedCaps("");
     setDrawerOpen(true);
-    setAnchorEl(null);
+    setOpenMenu(null);
   };
 
   return (
@@ -50,17 +54,17 @@ export default function CustomizedMenus() {
           size="small"
           variant="contained"
           color="primary"
-          onClick={handleClick}
+          onClick={handleOpenMenu}
         >
           Mostrar CAPS
         </Button>
       ) : (
-        <Fab color="primary" size="small" onClick={handleClick}>
+        <Fab color="primary" size="small" onClick={handleOpenMenu}>
           <MoreVertIcon />
         </Fab>
       )}
 
-      <StyledMenu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={() => setAnchorEl(null)}>
+      <StyledMenu anchorEl={openMenu} keepMounted open={Boolean(openMenu)} onClose={() => setOpenMenu(null)}>
         <StyledMenuItem onClick={handleShowClosestCaps}>
           <ListItemIcon className={classes.icon}>
             <NearMeIcon fontSize="small" />

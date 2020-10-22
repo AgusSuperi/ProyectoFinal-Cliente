@@ -20,7 +20,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: "100px",
-    width: "100%",
+    width: "95%",
+    margin: "auto"
   },
   button: {
     marginTop: 10,

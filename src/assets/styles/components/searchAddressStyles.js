@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: theme.shape.borderRadius,
     backgroundColor: "white",
     marginLeft: 0,
-    width: "320px",
+    width: "400px",
     boxShadow: "2px 2px #CECECE",
     alignContent: "center",
   },
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    width: "70%",
+    width: "270px",
     height: "4.5ch",
   },
   headerDivider: {

@@ -38,7 +38,8 @@ export const fetcher = (...args) =>
   fetch(...args)
     .then((res) => res.json())
     .catch((error) => {
-      swal(ErrorHandler(error), {
+      swal({
+        title: ErrorHandler(error),
         icon: "error",
       });
     });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useLocationContext } from "../../context/LocationContext";
@@ -7,19 +7,12 @@ import AutoLocationButton from "../button/AutoLocationButton";
 
 const SearchAddress = () => {
   const classes = useStyles();
-  //TO DO: VER BIEN SETUBICACION, LA PODEMOS VOLAR PASANDOLA POR PARAMETRO A UN METODO
-  const { GetUserLocationByAddressAndShowMarker, setUbicacion } = useLocationContext();
+  const [location, setLocation] = useState("");
+  const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
 
-  //TO DO: QUE UBICACION Y SETUBICACION SEA LOCAL EN LA CLASE
-  const handleInputChange = (event) => {
-    setUbicacion(event.target.value);
-  };
-
-  //QUE SE MANDE POR PARAMETRO A ESTE METODO (GETUSER------)
-  //CAMBIAR A HANDLEENTERKEYPRESS
-  const handleKeyPress = (event) => {
+  const handleEnterKeyPress = (event) => {
     if (event.which === 13 || event.keyCode === 13) {
-      GetUserLocationByAddressAndShowMarker();
+      GetUserLocationByAddressAndShowMarker(location);
     }
   };
 
@@ -35,8 +28,8 @@ const SearchAddress = () => {
           input: classes.inputInput,
         }}
         inputProps={{ "aria-label": "search" }}
-        onChange={handleInputChange}
-        onKeyPress={handleKeyPress}
+        onChange={(event) => setLocation(event.target.value)}
+        onKeyPress={handleEnterKeyPress}
       />
       <div className={classes.headerDivider} />
       <AutoLocationButton />

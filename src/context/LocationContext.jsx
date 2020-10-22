@@ -10,7 +10,6 @@ const LocationContext = createContext();
 export function LocationProvider(props) {
   const { enqueueSnackbar } = useSnackbar();
   const [marcadorUsuario, setMarcadorUsuario] = useState("");
-  const [ubicacion, setUbicacion] = useState("");
   const {
     backup,
     setDrawerOpen,
@@ -36,9 +35,9 @@ export function LocationProvider(props) {
     return resultComponent.road + " " + (addressNumber ? addressNumber : "");
   };
 
-  const GetUserLocationByAddressAndShowMarker = () => {
-    if (ubicacion) {
-      var direccion = encodeURI(ubicacion + ", Bahia Blanca, Argentina");
+  const GetUserLocationByAddressAndShowMarker = (location) => {
+    if (location) {
+      var direccion = encodeURI(location + ", Bahia Blanca, Argentina");
       var url = GetRequestUrl(direccion);
       Get(url)
         .then((response) => {
@@ -110,8 +109,6 @@ export function LocationProvider(props) {
 
   const value = {
     marcadorUsuario,
-    ubicacion,
-    setUbicacion,
     ShowClosestCapsOnMap,
     GetUserLocationByAddressAndShowMarker,
     GetUserLocationByGpsAndShowMarker,

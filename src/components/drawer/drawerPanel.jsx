@@ -2,7 +2,8 @@ import React from "react";
 import { Drawer } from "@material-ui/core";
 import { useStyles } from "../../assets/styles/components/drawerStyles";
 import { useCapsContext } from "../../context/CapsContext";
-import DrawerContainer from "./DrawerContainer";
+import FilterPanel from "../filters/FilterPanel";
+import SelectedCapsInformation from "./SelectedCapsInformation";
 
 const DrawerPanel = () => {
   const classes = useStyles();
@@ -18,7 +19,8 @@ const DrawerPanel = () => {
         paper: classes.drawerPaper,
       }}
     >
-      <DrawerContainer />
+      <FilterPanel />
+      <SelectedCapsInformation />
     </Drawer>
   );
 };

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-export const drawerWidth = 350;
+export const drawerWidth = 420;
 
 export const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   imageContainer: {
     width: "100%",
-    height: "200px",
+    height: "270px",
   },
   image: {
     width: "100%",
