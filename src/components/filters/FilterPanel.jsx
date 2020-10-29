@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Grid, Zoom } from "@material-ui/core";
 import { useStyles } from "../../assets/styles/components/FilterStyles";
 import { useCapsContext } from "../../context/CapsContext";
+import { useBusContext } from "../../context/BusContext";
 import { ButtonTooltip } from "../../assets/styles/components/buttonTooltipStyles";
 import FilterSelect from "./FilterSelect";
 import { SearchCapsByFilters } from "./SearchCapsByFilters";
@@ -12,6 +13,7 @@ const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const { filterPanelOpen, setMarcadores } = useCapsContext();
+  const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const { data: especialidades } = useSWR("/especialidades");
   const { data: neighborhoods } = useSWR("/barrios");
   const [selectedSpecialities, setSelectedSpecialities] = useState([]);
@@ -57,6 +59,8 @@ const FilterPanel = () => {
                     selectedNeighborhoods,
                     selectedSpecialities,
                     setMarcadores,
+                    setCapsBusStopMarkers,
+                    setUserBusStopMarkers,
                     enqueueSnackbar
                   )
                 }

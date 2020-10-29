@@ -5,6 +5,8 @@ export const SearchCapsByFilters = async (
   neighborhoodsList,
   specialitiesList,
   setMarcadores,
+  setCapsBusStopMarkers,
+  setUserBusStopMarkers,
   enqueueSnackbar
 ) => {
   if (hoursList.length === 0 && neighborhoodsList.length === 0 && specialitiesList.length === 0) {
@@ -18,5 +20,7 @@ export const SearchCapsByFilters = async (
       Especialidades: specialitiesList,
     };
     GetCapsByData(data, "/centrossalud/filtro", setMarcadores, enqueueSnackbar);
+    setCapsBusStopMarkers([]);
+    setUserBusStopMarkers([]);
   }
 };
