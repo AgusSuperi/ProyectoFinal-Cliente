@@ -27,6 +27,15 @@ export function CapsProvider(props) {
     return () => window.removeEventListener("resize", handleResize);
   }, [backup]);
 
+  const CloseBottomDrawer = () => {
+    if (selectedCaps) {
+      selectedCaps.selected = false;
+    }
+    setFilterPanelOpen(false);
+    setSelectedCaps("");
+    setDrawerOpen(false);
+  };
+
   const resetMarkers = () => {
     if (backup) {
       setMarcadores([...backup]);
@@ -42,6 +51,7 @@ export function CapsProvider(props) {
     filterPanelOpen,
     marcadores,
     mapCenter,
+    CloseBottomDrawer,
     resetMarkers,
     selectedCaps,
     setDrawerOpen,

@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useLocationContext } from "../../context/LocationContext";
+import { useCapsContext } from "../../context/CapsContext";
 import { useStyles } from "../../assets/styles/components/searchAddressStyles";
 import AutoLocationButton from "../button/AutoLocationButton";
+import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 
 const SearchAddress = () => {
   const classes = useStyles();
   const [location, setLocation] = useState("");
   const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
+  const { windowWidth } = useCapsContext();
 
   const handleEnterKeyPress = (event) => {
     if (event.which === 13 || event.keyCode === 13) {
@@ -17,7 +20,7 @@ const SearchAddress = () => {
   };
 
   return (
-    <div className={classes.search}>
+    <div className={windowWidth > ScreenSizes.Small ? classes.searchLargeScreen : classes.searchSmallScreen}>
       <div className={classes.searchIcon}>
         <SearchIcon />
       </div>
@@ -25,9 +28,9 @@ const SearchAddress = () => {
         placeholder="Ingrese su ubicación"
         classes={{
           root: classes.inputRoot,
-          input: classes.inputInput,
+          input:
+            windowWidth > ScreenSizes.Small ? classes.inputInputLargeScreen : classes.inputInputSmallScreen,
         }}
-        inputProps={{ "aria-label": "search" }}
         onChange={(event) => setLocation(event.target.value)}
         onKeyPress={handleEnterKeyPress}
       />

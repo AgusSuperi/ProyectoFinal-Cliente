@@ -8,6 +8,7 @@ import { SWRConfig } from "swr";
 import { fetcher } from "./utils/api/Api";
 import { SnackbarProvider } from "notistack";
 import NotFound from "./views/notFound/NotFound";
+import "./assets/css/app.css";
 
 export default function App() {
   return (

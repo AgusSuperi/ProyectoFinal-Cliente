@@ -1,12 +1,21 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
-  search: {
+  searchLargeScreen: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: "white",
     marginLeft: 0,
     width: "400px",
+    boxShadow: "2px 2px #CECECE",
+    alignContent: "center",
+  },
+  searchSmallScreen: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: "white",
+    marginLeft: 0,
+    width: "280px",
     boxShadow: "2px 2px #CECECE",
     alignContent: "center",
   },
@@ -22,9 +31,14 @@ export const useStyles = makeStyles((theme) => ({
   inputRoot: {
     color: "inherit",
   },
-  inputInput: {
+  inputInputLargeScreen: {
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     width: "270px",
+    height: "4.5ch",
+  },
+  inputInputSmallScreen: {
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    width: "150px",
     height: "4.5ch",
   },
   headerDivider: {

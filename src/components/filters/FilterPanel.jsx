@@ -8,11 +8,12 @@ import FilterSelect from "./FilterSelect";
 import { SearchCapsByFilters } from "./SearchCapsByFilters";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
+import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const { filterPanelOpen, setMarcadores } = useCapsContext();
+  const { filterPanelOpen, setMarcadores, windowWidth } = useCapsContext();
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const { data: especialidades } = useSWR("/especialidades");
   const { data: neighborhoods } = useSWR("/barrios");
@@ -23,7 +24,11 @@ const FilterPanel = () => {
   return (
     <>
       {filterPanelOpen ? (
-        <div className={classes.container}>
+        <div
+          className={
+            windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
+          }
+        >
           <FilterSelect
             items={["Las 24 hs", "08:00 a 14:00", "08:00 a 18:00"]}
             title="¿Qué horario/s busca?"

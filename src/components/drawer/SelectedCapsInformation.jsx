@@ -4,17 +4,24 @@ import { Typography } from "@material-ui/core";
 import { useCapsContext } from "../../context/CapsContext";
 import DrawerBottomNavigation from "./DrawerBottomNavigation";
 import TabPanels from "../tabPanel/TabPanels";
+import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 
 const SelectedCapsInformation = () => {
   const classes = useStyles();
-  const { selectedCaps } = useCapsContext();
+  const { selectedCaps, windowWidth } = useCapsContext();
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
     <>
       {selectedCaps ? (
         <div>
-          <div className={classes.imageContainer}>
+          <div
+            className={
+              windowWidth > ScreenSizes.Small
+                ? classes.imageContainerLargeScreen
+                : classes.imageContainerSmallScreen
+            }
+          >
             <img
               src={"http://localhost:5000/api/imagenes/" + selectedCaps.imagenURL}
               alt="Foto del CAPS"

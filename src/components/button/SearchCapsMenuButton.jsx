@@ -9,6 +9,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
+import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 
 export default function SearchCapsMenuButton() {
   const classes = useStyles();
@@ -38,7 +39,9 @@ export default function SearchCapsMenuButton() {
   };
 
   const handleShowFilter = () => {
-    selectedCaps.selected = false;
+    if (selectedCaps) {
+      selectedCaps.selected = false;
+    }
     setFilterPanelOpen(true);
     setSelectedCaps("");
     setDrawerOpen(true);
@@ -47,7 +50,7 @@ export default function SearchCapsMenuButton() {
 
   return (
     <div>
-      {windowWidth > 599 ? (
+      {windowWidth > ScreenSizes.Small ? (
         <Button
           startIcon={<VisibilityIcon />}
           endIcon={<ExpandMoreIcon />}

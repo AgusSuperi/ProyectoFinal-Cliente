@@ -5,8 +5,11 @@ export const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
   },
-  mapContent: {
+  mapContentDrawerLeft: {
     flexGrow: 1,
     marginLeft: -drawerWidth,
+  },
+  mapContentDrawerBottom: {
+    flexGrow: 1,
   },
 }));

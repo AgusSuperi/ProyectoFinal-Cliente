@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   openOrCloseDrawerButton: {
     top: "100px",
-    left: 0,
+    left: "5px",
     position: "absolute",
     zIndex: 2,
   },

@@ -27,4 +27,12 @@ export const useStyles = makeStyles((theme) => ({
     right: 10,
     top: 6,
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
+  CloseBottomDrawerButtonContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0
+  }
 }));
