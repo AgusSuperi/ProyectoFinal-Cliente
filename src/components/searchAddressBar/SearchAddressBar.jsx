@@ -7,7 +7,7 @@ import { useStyles } from "../../assets/styles/components/searchAddressStyles";
 import AutoLocationButton from "../button/AutoLocationButton";
 import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 
-const SearchAddress = () => {
+const SearchAddressBar = () => {
   const classes = useStyles();
   const [location, setLocation] = useState("");
   const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
@@ -40,4 +40,4 @@ const SearchAddress = () => {
   );
 };
 
-export default SearchAddress;
+export default SearchAddressBar;

@@ -1,6 +1,6 @@
 import React from "react";
 import OpenOrCloseDrawerButton from "./OpenOrCloseDrawerButton";
-import SearchAddress from "../searchAddress/SearchAddress";
+import SearchAddress from "../searchAddressBar/SearchAddressBar";
 import SearchCapsMenuButton from "./SearchCapsMenuButton";
 import { useStyles } from "../../assets/styles/views/mapStyles";
 import { useCapsContext } from "../../context/CapsContext";
