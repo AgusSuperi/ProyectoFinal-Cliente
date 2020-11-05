@@ -6,7 +6,7 @@ const CapsContext = createContext();
 
 export function CapsProvider(props) {
   const { data: backup } = useSWR("/centrossalud");
-  const [marcadores, setMarcadores] = useState([]);
+  const [markers, setMarkers] = useState([]);
   const [selectedCaps, setSelectedCaps] = useState("");
   const [zoom, setZoom] = useState(13);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -21,7 +21,7 @@ export function CapsProvider(props) {
 
   useEffect(() => {
     if (backup) {
-      setMarcadores([...backup]);
+      setMarkers([...backup]);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -38,7 +38,7 @@ export function CapsProvider(props) {
 
   const resetMarkers = () => {
     if (backup) {
-      setMarcadores([...backup]);
+      setMarkers([...backup]);
     }
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
@@ -49,14 +49,14 @@ export function CapsProvider(props) {
     backup,
     drawerOpen,
     filterPanelOpen,
-    marcadores,
+    markers,
     mapCenter,
     CloseBottomDrawer,
     resetMarkers,
     selectedCaps,
     setDrawerOpen,
     setFilterPanelOpen,
-    setMarcadores,
+    setMarkers,
     setMapCenter,
     setSelectedCaps,
     setZoom,

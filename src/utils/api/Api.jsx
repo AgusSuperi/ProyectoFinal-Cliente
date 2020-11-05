@@ -1,7 +1,7 @@
 import swal from "sweetalert";
 import { ErrorHandler } from "../errorHandler/ErrorHandler";
 
-export const GetCapsByData = (data, path, setMarcadores, enqueueSnackbar) => {
+export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
   fetch(path, {
     method: "POST",
     mode: "cors",
@@ -17,7 +17,7 @@ export const GetCapsByData = (data, path, setMarcadores, enqueueSnackbar) => {
     .then((res) => res.json())
     .then((res) =>
       res.length > 0
-        ? setMarcadores(res)
+        ? setMarkers(res)
         : enqueueSnackbar("No se encontraron resultados", {
             variant: "warning",
           })

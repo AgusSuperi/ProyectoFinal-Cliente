@@ -9,13 +9,13 @@ const LocationContext = createContext();
 
 export function LocationProvider(props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [marcadorUsuario, setMarcadorUsuario] = useState("");
+  const [userMarker, setUserMarker] = useState("");
   const {
     backup,
     setDrawerOpen,
     setFilterPanelOpen,
     setMapCenter,
-    setMarcadores,
+    setMarkers,
     setSelectedCaps,
   } = useCapsContext();
   const apikey = "7190089a51d94b95bce447a7c05bb7c3";
@@ -62,22 +62,23 @@ export function LocationProvider(props) {
   };
 
   const ShowPosition = (position) => {
-    CreateAndShowUserMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+    CreateAndShowUserMarker({ lat: position.coords.late, lng: position.coords.lnge });
   };
 
-  const CreateAndShowUserMarker = (coordenadas) => {
-    let marcador = {
-      latitud: coordenadas.lat,
-      longitud: coordenadas.lng,
+  const CreateAndShowUserMarker = (coords) => {
+    let marker = {
+      lat: coords.lat,
+      lng: coords.lng,
     };
-    setMarcadorUsuario(marcador);
-    setMapCenter(coordenadas);
+    setUserMarker(marker);
+    setMapCenter(coords);
   };
 
   const ShowClosestCapsOnMap = () => {
-    if (marcadorUsuario) {
-      const closestCaps = GetClosestCapsByUserLocation([marcadorUsuario.latitud, marcadorUsuario.longitud]);
-      setMarcadores([closestCaps]);
+    if (userMarker) {
+      const closestCaps = GetClosestCapsByUserLocation([userMarker.lat, userMarker.lng]);
+      closestCaps.selected=true;
+      setMarkers([closestCaps]);
       setDrawerOpen(true);
       setFilterPanelOpen(false);
     } else {
@@ -95,8 +96,8 @@ export function LocationProvider(props) {
       const distance = GetDistanceFromLatLonInM(
         userLocation[0],
         userLocation[1],
-        caps.latitud,
-        caps.longitud
+        caps.lat,
+        caps.lng
       );
       if (distance < capsDistance) {
         closestCaps = { ...caps };
@@ -108,7 +109,7 @@ export function LocationProvider(props) {
   };
 
   const value = {
-    marcadorUsuario,
+    userMarker,
     ShowClosestCapsOnMap,
     GetUserLocationByAddressAndShowMarker,
     GetUserLocationByGpsAndShowMarker,

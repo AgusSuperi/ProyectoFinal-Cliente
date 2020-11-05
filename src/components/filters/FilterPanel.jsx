@@ -13,7 +13,7 @@ import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const { filterPanelOpen, setMarcadores, windowWidth } = useCapsContext();
+  const { filterPanelOpen, setMarkers, windowWidth } = useCapsContext();
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const { data: especialidades } = useSWR("/especialidades");
   const { data: neighborhoods } = useSWR("/barrios");
@@ -63,7 +63,7 @@ const FilterPanel = () => {
                     selectedHours,
                     selectedNeighborhoods,
                     selectedSpecialities,
-                    setMarcadores,
+                    setMarkers,
                     setCapsBusStopMarkers,
                     setUserBusStopMarkers,
                     enqueueSnackbar

@@ -8,16 +8,16 @@ import {
   userLocationIcon,
   useStyles,
 } from "../../assets/styles/views/mapStyles";
-import BusMarkerPopup from "../../components/map/BusMarkerPopup";
+import BusMarkerPopup from "../../components/markerPopUp/BusMarkerPopup";
 import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
 import ButtonsPanel from "../../components/button/ButtonsPanel";
 
-export default function Mapa() {
+export default function CityMap() {
   const classes = useStyles();
   const {
-    marcadores,
+    markers,
     zoom,
     mapCenter,
     setDrawerOpen,
@@ -25,7 +25,7 @@ export default function Mapa() {
     setSelectedCaps,
   } = useCapsContext();
   const { capsBusStopMarkers, userBusStopMarkers } = useBusContext();
-  const { marcadorUsuario } = useLocationContext();
+  const { userMarker } = useLocationContext();
   const [actualMarkerSelected, setActualMarkerSelected] = useState([]);
 
   const handleSelectMarker = (capsMarker) => {
@@ -54,7 +54,7 @@ export default function Mapa() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {(marcadores || []).map((capsMarker) => (
+        {(markers || []).map((capsMarker) => (
           <Marker
             key={capsMarker.id}
             position={[capsMarker.latitud, capsMarker.longitud]}
@@ -63,9 +63,9 @@ export default function Mapa() {
           />
         ))}
 
-        {marcadorUsuario ? (
+        {userMarker ? (
           <Marker
-            position={[marcadorUsuario.latitud, marcadorUsuario.longitud]}
+            position={[userMarker.lat, userMarker.lng]}
             icon={userLocationIcon}
           />
         ) : null}

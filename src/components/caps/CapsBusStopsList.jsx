@@ -10,9 +10,9 @@ import { useLocationContext } from "../../context/LocationContext";
 const CapsBusStopsList = ({ radius }) => {
   const classes = useStyles();
   const [closestBuses, setClosestBuses] = useState([]);
-  const { selectedCaps, setMarcadores } = useCapsContext();
+  const { selectedCaps, setMarkers } = useCapsContext();
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
-  const { marcadorUsuario } = useLocationContext();
+  const { userMarker } = useLocationContext();
 
   useEffect(() => {
     if (selectedCaps) {
@@ -22,13 +22,13 @@ const CapsBusStopsList = ({ radius }) => {
 
   const handleShowBusStops = (closestBus) => {
     if (selectedCaps) {
-      setMarcadores([selectedCaps]);
+      setMarkers([selectedCaps]);
       setCapsBusStopMarkers(
         GetClosestBusStopByLine(closestBus, [selectedCaps.latitud, selectedCaps.longitud])
       );
-      if (marcadorUsuario) {
+      if (userMarker) {
         setUserBusStopMarkers(
-          GetClosestBusStopByLine(closestBus, [marcadorUsuario.latitud, marcadorUsuario.longitud])
+          GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng])
         );
       }
     }
