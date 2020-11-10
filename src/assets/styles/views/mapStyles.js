@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   searchAddressPanel: {
     top: "10px",
-    left: "12px",
+    left: "6px",
     position: "absolute",
     zIndex: theme.zIndex.drawer + 1,
   },
