@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     position: "absolute",
     zIndex: 2,
     overflow: "auto",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   drawerPaper: {
     width: drawerWidth,
@@ -59,5 +59,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   tabPanels: {
     textAlign: "center",
+  },
+  distanceLabel: {
+    color: "#969696",
   },
 }));

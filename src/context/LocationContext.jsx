@@ -23,7 +23,12 @@ export function LocationProvider(props) {
 
   const GetRequestUrl = (requestParameter) => {
     var request_url =
-      url_geocode + "?key=" + apikey + "&q=" + requestParameter + "&pretty=1&no_annotations=1";
+      url_geocode +
+      "?key=" +
+      apikey +
+      "&q=" +
+      requestParameter +
+      "&pretty=1&no_annotations=1";
     return request_url;
   };
 
@@ -62,7 +67,10 @@ export function LocationProvider(props) {
   };
 
   const ShowPosition = (position) => {
-    CreateAndShowUserMarker({ lat: position.coords.late, lng: position.coords.lnge });
+    CreateAndShowUserMarker({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    });
   };
 
   const CreateAndShowUserMarker = (coords) => {
@@ -76,8 +84,11 @@ export function LocationProvider(props) {
 
   const ShowClosestCapsOnMap = () => {
     if (userMarker) {
-      const closestCaps = GetClosestCapsByUserLocation([userMarker.lat, userMarker.lng]);
-      closestCaps.selected=true;
+      const closestCaps = GetClosestCapsByUserLocation([
+        userMarker.lat,
+        userMarker.lng,
+      ]);
+      closestCaps.selected = true;
       setMarkers([closestCaps]);
       setDrawerOpen(true);
       setFilterPanelOpen(false);
@@ -122,7 +133,9 @@ export function LocationProvider(props) {
 export function useLocationContext() {
   const context = useContext(LocationContext);
   if (context === undefined) {
-    throw new Error("useLocationContext debe ser usado dentro del proveedor LocationContext");
+    throw new Error(
+      "useLocationContext debe ser usado dentro del proveedor LocationContext"
+    );
   }
   return context;
 }
