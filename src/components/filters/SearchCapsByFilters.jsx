@@ -1,5 +1,7 @@
 import { GetCapsByData } from "../../utils/api/Api";
 
+const SERVER_ENDPOINT = process.env.REACT_APP_ENDPOINT;
+
 export const SearchCapsByFilters = async (
   hoursList,
   neighborhoodsList,
@@ -19,7 +21,7 @@ export const SearchCapsByFilters = async (
       Barrios: neighborhoodsList,
       Especialidades: specialitiesList,
     };
-    GetCapsByData(data, "/centrossalud/filtro", setMarkers, enqueueSnackbar);
+    GetCapsByData(data, SERVER_ENDPOINT + "/filtros/centrossalud", setMarkers, enqueueSnackbar);
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
   }
