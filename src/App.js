@@ -4,16 +4,12 @@ import Layout from "./layout/Layout";
 import { BusProvider } from "./context/BusContext";
 import { CapsProvider } from "./context/CapsContext";
 import { LocationProvider } from "./context/LocationContext";
-import { SWRConfig } from "swr";
-import { fetcher } from "./utils/api/Api";
 import { SnackbarProvider } from "notistack";
 import NotFound from "./views/notFound/NotFound";
 import "./assets/css/app.css";
 
 export default function App() {
   return (
-    //Alertas que aparecen ej busco cap cercano y no tengo la ubicacion mia
-    //solo uno a la vez
     <SnackbarProvider
       maxSnack={1}
       anchorOrigin={{
@@ -21,15 +17,6 @@ export default function App() {
         horizontal: "right",
       }}
     >
-     {/**Guarda en la cache */}
-      <SWRConfig
-        value={{
-          refreshInterval: 0,
-          revalidateOnFocus: false,
-          revalidateOnReconnect: false,
-          fetcher,
-        }}
-      >
         <BusProvider>
           <CapsProvider>
             <LocationProvider>
@@ -40,7 +27,6 @@ export default function App() {
             </LocationProvider>
           </CapsProvider>
         </BusProvider>
-      </SWRConfig>
     </SnackbarProvider>
   );
 }

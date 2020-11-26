@@ -1,8 +1,21 @@
+import axios from "axios";
 import swal from "sweetalert";
 import { ErrorHandler } from "../errorHandler/ErrorHandler";
 
+const SERVER_DOMAIN = process.env.REACT_APP_ENDPOINT;
+
+const getHeaders = () => {
+  return {
+    headers: {
+      Accept: "application/json",
+      Contentype: "application/json",
+    },
+    timeout: 1000 * 15,
+  };
+};
+
 export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
-  fetch(path, {
+  fetch(SERVER_DOMAIN + path, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -29,13 +42,12 @@ export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
     });
 };
 
-export const Get = async (url) => {
-  return await fetch(url).then((res) => res.json());
+export const Get = (path) => {
+  return axios.get(SERVER_DOMAIN + path, getHeaders());
 };
 
-//TO DO: VER QUE CASO CON EL CARTEL DE ERROR, SE VE RARO
-export const fetcher = (...args) =>
-  fetch(...args)
+export const GetCoordsByAddress = (path) =>
+  fetch(path)
     .then((res) => res.json())
     .catch((error) => {
       swal({

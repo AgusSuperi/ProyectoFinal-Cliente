@@ -2,7 +2,7 @@ import React, { useContext, useState, createContext } from "react";
 import { GetDistanceFromLatLonInM } from "../utils/distanceCalculator/DistanceCalculator";
 import { useCapsContext } from "../context/CapsContext";
 import { useSnackbar } from "notistack";
-import { Get } from "../utils/api/Api";
+import { GetCoordsByAddress } from "../utils/api/Api";
 import { ErrorHandler } from "../utils/errorHandler/ErrorHandler";
 
 const LocationContext = createContext();
@@ -23,30 +23,17 @@ export function LocationProvider(props) {
 
   const GetRequestUrl = (requestParameter) => {
     var request_url =
-      url_geocode +
-      "?key=" +
-      apikey +
-      "&q=" +
-      requestParameter +
-      "&pretty=1&no_annotations=1";
+      url_geocode + "?key=" + apikey + "&q=" + requestParameter + "&pretty=1&no_annotations=1";
     return request_url;
-  };
-
-  const GetAddressByCoords = async (coords) => {
-    const url = GetRequestUrl(coords[0] + "+" + coords[1]);
-    const result = await Get(url);
-    var resultComponent = result.results[0].components;
-    var addressNumber = resultComponent.house_number;
-    return resultComponent.road + " " + (addressNumber ? addressNumber : "");
   };
 
   const GetUserLocationByAddressAndShowMarker = (location) => {
     if (location) {
       var direccion = encodeURI(location + ", Bahia Blanca, Argentina");
       var url = GetRequestUrl(direccion);
-      Get(url)
-        .then((response) => {
-          CreateAndShowUserMarker(response.results[0].geometry);
+      GetCoordsByAddress(url)
+        .then((res) => {
+          CreateAndShowUserMarker(res.results[0].geometry);
         })
         .catch((error) => {
           enqueueSnackbar(ErrorHandler(error), {
@@ -84,10 +71,7 @@ export function LocationProvider(props) {
 
   const ShowClosestCapsOnMap = () => {
     if (userMarker) {
-      const closestCaps = GetClosestCapsByUserLocation([
-        userMarker.lat,
-        userMarker.lng,
-      ]);
+      const closestCaps = GetClosestCapsByUserLocation([userMarker.lat, userMarker.lng]);
       closestCaps.selected = true;
       setMarkers([closestCaps]);
       setDrawerOpen(true);
@@ -99,16 +83,15 @@ export function LocationProvider(props) {
     }
   };
 
-  //TO DO: CAMBIAR A UN ARCHIVO A PARTE
   const GetClosestCapsByUserLocation = (userLocation) => {
     let closestCaps;
-    let capsDistance = 100000;
+    let capsDistance = Number.MAX_SAFE_INTEGER;
     backup.forEach((caps) => {
       const distance = GetDistanceFromLatLonInM(
         userLocation[0],
         userLocation[1],
-        caps.lat,
-        caps.lng
+        caps.latitud,
+        caps.longitud
       );
       if (distance < capsDistance) {
         closestCaps = { ...caps };
@@ -124,7 +107,6 @@ export function LocationProvider(props) {
     ShowClosestCapsOnMap,
     GetUserLocationByAddressAndShowMarker,
     GetUserLocationByGpsAndShowMarker,
-    GetAddressByCoords,
   };
 
   return <LocationContext.Provider value={value} {...props} />;
@@ -133,9 +115,7 @@ export function LocationProvider(props) {
 export function useLocationContext() {
   const context = useContext(LocationContext);
   if (context === undefined) {
-    throw new Error(
-      "useLocationContext debe ser usado dentro del proveedor LocationContext"
-    );
+    throw new Error("useLocationContext debe ser usado dentro del proveedor LocationContext");
   }
   return context;
 }
