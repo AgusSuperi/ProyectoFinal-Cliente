@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Grid, Zoom } from "@material-ui/core";
+import { Button, Divider, Grid, Zoom } from "@material-ui/core";
 import { useStyles } from "../../assets/styles/components/FilterStyles";
 import { useCapsContext } from "../../context/CapsContext";
 import { useBusContext } from "../../context/BusContext";
@@ -10,6 +10,7 @@ import { Get } from "../../utils/api/Api";
 import { useSnackbar } from "notistack";
 import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
 import { ErrorHandler } from "../../utils/errorHandler/ErrorHandler";
+import CheckBoxList from "./CheckBoxList";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -21,6 +22,25 @@ const FilterPanel = () => {
   const [selectedSpecialities, setSelectedSpecialities] = useState([]);
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState([]);
   const [selectedHours, setSelectedHours] = useState([]);
+
+  const handleUpdateListAndFilter = (list, setList, item) => {
+    if (list.includes(item)) {
+      setList(list.filter((x) => x !== item));
+    } else {
+      setList([...list, item]);
+    }
+    SearchCapsByFilters(
+      selectedHours,
+      selectedNeighborhoods,
+      selectedSpecialities,
+      setMarkers,
+      setCapsBusStopMarkers,
+      setUserBusStopMarkers,
+      enqueueSnackbar
+    );
+  };
+
+  console.log(selectedHours, selectedNeighborhoods, selectedSpecialities);
 
   useEffect(() => {
     Get("/especialidades")
@@ -47,55 +67,34 @@ const FilterPanel = () => {
       {filterPanelOpen ? (
         <div
           className={
-            windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
+            windowWidth > ScreenSizes.Small
+              ? classes.containerLargeScreen
+              : classes.containerSmallScreen
           }
         >
-          <FilterSelect
+          <CheckBoxList
+            title="Horarios"
             items={["Las 24 hs", "08:00 a 14:00", "08:00 a 18:00"]}
-            title="¿Qué horario/s busca?"
             selectedItems={selectedHours}
             setSelectedItems={setSelectedHours}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
           />
-          <FilterSelect
-            items={neighborhoods}
-            title="¿Qué barrio/s busca?"
-            selectedItems={selectedNeighborhoods}
-            setSelectedItems={setSelectedNeighborhoods}
-          />
-          <FilterSelect
+          <Divider />
+          <CheckBoxList
+            title="Especialidades"
             items={specialities}
-            title="¿Qué especialidad/es busca?"
             selectedItems={selectedSpecialities}
             setSelectedItems={setSelectedSpecialities}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
           />
-          <Grid container justify="center">
-            <ButtonTooltip
-              title="Busca los CAPS que cumplan con los criterios de búsqueda"
-              TransitionComponent={Zoom}
-              arrow
-              interactive
-              placement="right"
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() =>
-                  SearchCapsByFilters(
-                    selectedHours,
-                    selectedNeighborhoods,
-                    selectedSpecialities,
-                    setMarkers,
-                    setCapsBusStopMarkers,
-                    setUserBusStopMarkers,
-                    enqueueSnackbar
-                  )
-                }
-                className={classes.button}
-              >
-                Encontrar CAPS
-              </Button>
-            </ButtonTooltip>
-          </Grid>
+          <Divider />
+          <CheckBoxList
+            title="Barrios"
+            items={neighborhoods}
+            selectedItems={selectedNeighborhoods}
+            setSelectedItems={setSelectedNeighborhoods}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
+          />
         </div>
       ) : undefined}
     </>
