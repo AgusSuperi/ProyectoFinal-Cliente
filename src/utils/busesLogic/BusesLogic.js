@@ -1,5 +1,5 @@
 import stops from "../../assets/json/paradasColectivos.json";
-import { GetDistanceFromLatLonInM } from "../distanceCalculator/DistanceCalculator";
+import GetDistanceFromLatLonInM from "../distanceCalculator/DistanceCalculator";
 
 export const GetClosestCapsBusStop = (coords, radius) => {
   var buses = [];

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useStyles } from "../../assets/styles/components/SliderStyles";
+import { useStyles } from "./Styles";
 import { Slider, Typography } from "@material-ui/core";
 import { SliderMarks } from "./SliderMarks";
 import CapsBusStopsList from "../caps/CapsBusStopsList";

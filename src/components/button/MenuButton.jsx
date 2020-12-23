@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Fab, ListItemIcon, ListItemText } from "@material-ui/core";
-import { StyledMenu, StyledMenuItem, useStyles } from "../../assets/styles/components/menuItemStyles";
+import { StyledMenu, StyledMenuItem, useStyles } from "./Styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import NearMeIcon from "@material-ui/icons/NearMe";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -9,9 +9,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
-import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
+import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 
-export default function SearchCapsMenuButton() {
+export default function MenuButton() {
   const classes = useStyles();
   const [openMenu, setOpenMenu] = useState(null);
   const {
@@ -49,7 +49,7 @@ export default function SearchCapsMenuButton() {
   };
 
   return (
-    <div>
+    <div className={classes.MenuButton}>
       {windowWidth > ScreenSizes.Small ? (
         <Button
           startIcon={<VisibilityIcon />}

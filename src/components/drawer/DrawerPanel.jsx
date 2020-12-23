@@ -1,11 +1,11 @@
 import React from "react";
 import { Drawer } from "@material-ui/core";
-import { useStyles } from "../../assets/styles/components/drawerStyles";
+import { useStyles } from "./Styles";
 import { useCapsContext } from "../../context/CapsContext";
 import FilterPanel from "../filters/FilterPanel";
 import SelectedCapsInformation from "./SelectedCapsInformation";
-import { ScreenSizes } from "../../utils/screenSizeValues/ScreenSizeValues";
-import CloseBottomDrawerButton from "../button/CloseBottomDrawerButton";
+import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import DrawerButtonMobile from "../button/DrawerButtonMobile";
 
 const DrawerPanel = () => {
   const classes = useStyles();
@@ -30,7 +30,7 @@ const DrawerPanel = () => {
         <>
           {selectedCaps || filterPanelOpen ? (
             <div className={classes.bottomDrawer}>
-              <CloseBottomDrawerButton />
+              <DrawerButtonMobile />
               <FilterPanel />
               <SelectedCapsInformation />
             </div>

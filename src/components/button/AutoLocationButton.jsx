@@ -1,9 +1,9 @@
 import React from "react";
 import { Fab, Zoom } from "@material-ui/core";
 import MyLocationIcon from "@material-ui/icons/MyLocation";
-import { ButtonTooltip } from "../../assets/styles/components/buttonTooltipStyles";
+import { ButtonTooltip } from "./Styles";
 import { useLocationContext } from "../../context/LocationContext";
-import { useStyles } from "../../assets/styles/components/buttonStyles";
+import { useStyles } from "./Styles";
 
 const AutoLocationButton = () => {
   const classes = useStyles();
@@ -12,7 +12,7 @@ const AutoLocationButton = () => {
   return (
     <div className={classes.browserLocationButton}>
       <ButtonTooltip
-        title="Muestra su ubicacion actual en el mapa"
+        title="Mostrar ubicación actual en el mapa"
         TransitionComponent={Zoom}
         arrow
         interactive

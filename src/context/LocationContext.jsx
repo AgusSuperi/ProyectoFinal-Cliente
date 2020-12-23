@@ -1,9 +1,9 @@
 import React, { useContext, useState, createContext } from "react";
-import { GetDistanceFromLatLonInM } from "../utils/distanceCalculator/DistanceCalculator";
+import GetDistanceFromLatLonInM from "../utils/distanceCalculator/DistanceCalculator";
 import { useCapsContext } from "../context/CapsContext";
 import { useSnackbar } from "notistack";
 import { Get } from "../utils/api/Api";
-import { ErrorHandler } from "../utils/errorHandler/ErrorHandler";
+import ErrorHandler from "../utils/errorHandler/ErrorHandler";
 
 const LocationContext = createContext();
 
@@ -23,12 +23,7 @@ export function LocationProvider(props) {
 
   const GetRequestUrl = (requestParameter) => {
     var request_url =
-      url_geocode +
-      "?key=" +
-      apikey +
-      "&q=" +
-      requestParameter +
-      "&pretty=1&no_annotations=1";
+      url_geocode + "?key=" + apikey + "&q=" + requestParameter + "&pretty=1&no_annotations=1";
     return request_url;
   };
 
@@ -84,10 +79,7 @@ export function LocationProvider(props) {
 
   const ShowClosestCapsOnMap = () => {
     if (userMarker) {
-      const closestCaps = GetClosestCapsByUserLocation([
-        userMarker.lat,
-        userMarker.lng,
-      ]);
+      const closestCaps = GetClosestCapsByUserLocation([userMarker.lat, userMarker.lng]);
       closestCaps.selected = true;
       setMarkers([closestCaps]);
       setDrawerOpen(true);
@@ -99,7 +91,6 @@ export function LocationProvider(props) {
     }
   };
 
-  //TO DO: CAMBIAR A UN ARCHIVO A PARTE
   const GetClosestCapsByUserLocation = (userLocation) => {
     let closestCaps;
     let capsDistance = 100000;
@@ -107,8 +98,8 @@ export function LocationProvider(props) {
       const distance = GetDistanceFromLatLonInM(
         userLocation[0],
         userLocation[1],
-        caps.lat,
-        caps.lng
+        caps.latitud,
+        caps.longitud
       );
       if (distance < capsDistance) {
         closestCaps = { ...caps };
@@ -133,9 +124,7 @@ export function LocationProvider(props) {
 export function useLocationContext() {
   const context = useContext(LocationContext);
   if (context === undefined) {
-    throw new Error(
-      "useLocationContext debe ser usado dentro del proveedor LocationContext"
-    );
+    throw new Error("useLocationContext debe ser usado dentro del proveedor LocationContext");
   }
   return context;
 }
