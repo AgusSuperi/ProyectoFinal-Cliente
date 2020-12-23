@@ -25,7 +25,7 @@ const SelectedCapsInformation = () => {
     var distanceRounded = Math.round(distance);
     return (
       <Typography variant="subtitle1" className={classes.distanceLabel}>
-        Usted se encuentra a aproximadamente
+        Usted se encuentra a
         {distanceRounded >= 1000
           ? " " + (distance / 1000).toFixed(1) + " km"
           : " " + distanceRounded + " metros"}
