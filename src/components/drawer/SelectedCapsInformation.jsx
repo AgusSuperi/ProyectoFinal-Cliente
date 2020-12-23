@@ -13,7 +13,6 @@ const SelectedCapsInformation = () => {
   const { selectedCaps, windowWidth } = useCapsContext();
   const { userMarker } = useLocationContext();
   const [selectedTab, setSelectedTab] = useState(0);
-  const SERVER_ENDPOINT = process.env.REACT_APP_ENDPOINT;
 
   const GetDistanceBetweenSelectedCapsAndUserLocation = () => {
     var distance = GetDistanceFromLatLonInM(
@@ -44,17 +43,24 @@ const SelectedCapsInformation = () => {
             }
           >
             <img
-              src={SERVER_ENDPOINT + "/imagenes/" + selectedCaps.imagenURL}
+              src={
+                "http://localhost:5000/api/imagenes/" + selectedCaps.imagenURL
+              }
               alt="Foto del CAPS"
               className={classes.image}
             />
           </div>
           <div className={classes.title}>
             <Typography variant="h5">{selectedCaps.nombre}</Typography>
-            {userMarker ? GetDistanceBetweenSelectedCapsAndUserLocation() : undefined}
+            {userMarker
+              ? GetDistanceBetweenSelectedCapsAndUserLocation()
+              : undefined}
           </div>
           <hr />
-          <DrawerBottomNavigation value={selectedTab} setValue={setSelectedTab} />
+          <DrawerBottomNavigation
+            value={selectedTab}
+            setValue={setSelectedTab}
+          />
           <div className={classes.tabPanels}>
             <TabPanels value={selectedTab} />
           </div>

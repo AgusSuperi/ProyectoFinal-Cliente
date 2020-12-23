@@ -5,11 +5,8 @@ import { useCapsContext } from "../../context/CapsContext";
 import useSWR from "swr";
 
 const CapsSpecialitiesList = () => {
-  const SERVER_ENDPOINT = process.env.REACT_APP_ENDPOINT;
   const { selectedCaps } = useCapsContext();
-  const { data: specialities } = useSWR(
-    SERVER_ENDPOINT + `/centrossalud/${selectedCaps.id}/especialidades`
-  );
+  const { data: specialities } = useSWR(`/centrossalud/${selectedCaps.id}/especialidades`);
 
   return (
     <div>
