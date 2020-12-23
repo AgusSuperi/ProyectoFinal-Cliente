@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
 import BusIcon from "@material-ui/icons/DirectionsBus";
-import { useStyles } from "../../assets/styles/components/capsBusStopsStyles";
+import { useStyles } from "./Styles";
 import { GetClosestBusStopByLine, GetClosestCapsBusStop } from "../../utils/busesLogic/BusesLogic";
 import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
@@ -27,9 +27,7 @@ const CapsBusStopsList = ({ radius }) => {
         GetClosestBusStopByLine(closestBus, [selectedCaps.latitud, selectedCaps.longitud])
       );
       if (userMarker) {
-        setUserBusStopMarkers(
-          GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng])
-        );
+        setUserBusStopMarkers(GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng]));
       }
     }
   };

@@ -1,6 +1,6 @@
 import { GetCapsByData } from "../../utils/api/Api";
 
-export const SearchCapsByFilters = async (
+const SearchCapsByFilters = async (
   hoursList,
   neighborhoodsList,
   specialitiesList,
@@ -20,8 +20,10 @@ export const SearchCapsByFilters = async (
       Barrios: neighborhoodsList,
       Especialidades: specialitiesList,
     };
-    GetCapsByData(data, "/filtros/centrossalud", setMarkers, enqueueSnackbar);
+    GetCapsByData(data, "/centrossalud/filtro", setMarkers, enqueueSnackbar);
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
   }
 };
+
+export default SearchCapsByFilters;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useStyles, MenuProps } from "../../assets/styles/components/FilterStyles";
+import { useStyles, MenuProps } from "./Styles";
 import {
   Checkbox,
   Chip,

@@ -1,9 +1,9 @@
 import React from "react";
-import { useStyles } from "../assets/styles/layout/layoutStyles";
+import { useStyles } from "./Styles";
 import DrawerPanel from "../components/drawer/DrawerPanel";
-import Map from "../views/map/Map";
+import Map from "../components/map/Map";
 import { useCapsContext } from "../context/CapsContext";
-import { ScreenSizes } from "../utils/screenSizeValues/ScreenSizeValues";
+import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 
 export default function Layout() {
   const classes = useStyles();

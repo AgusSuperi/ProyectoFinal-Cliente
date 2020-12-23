@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
 import ArrowIcon from "@material-ui/icons/ArrowRight";
 import { useCapsContext } from "../../context/CapsContext";
-import { Get } from "../../utils/api/Api";
-import { ErrorHandler } from "../../utils/errorHandler/ErrorHandler";
-import { useSnackbar } from "notistack";
+import useSWR from "swr";
 
 const CapsSpecialitiesList = () => {
   const { selectedCaps } = useCapsContext();
-  const [specialities, setSpecialities] = useState([]);
-  const { enqueueSnackbar } = useSnackbar();
-
-  useEffect(() => {
-    setSpecialities(Get(`/centrossalud/${selectedCaps.id}/especialidades`));
-  }, [selectedCaps]);
-
-  useEffect(() => {
-    Get(`/centrossalud/${selectedCaps.id}/especialidades`)
-      .then((res) => setSpecialities(res.data))
-      .catch((error) => {
-        enqueueSnackbar(ErrorHandler(error), {
-          variant: "error",
-        });
-      });
-  }, [selectedCaps, enqueueSnackbar]);
+  const { data: specialities } = useSWR(`/centrossalud/${selectedCaps.id}/especialidades`);
 
   return (
     <div>

@@ -19,6 +19,12 @@ export const useStyles = makeStyles((theme) => ({
     boxShadow: "2px 2px #CECECE",
     alignContent: "center",
   },
+  searchAddressPanel: {
+    top: "10px",
+    left: "6px",
+    position: "absolute",
+    zIndex: theme.zIndex.drawer + 1,
+  },
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: "100%",

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import NotFoundImage from "../../assets/img/notFound.png";
-import { useStyles } from "../../assets/styles/views/NotFoundStyles";
+import { useStyles } from "./Styles";
 import { Button, Container } from "@material-ui/core";
 
 const NotFound = () => {

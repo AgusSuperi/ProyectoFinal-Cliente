@@ -1,11 +1,11 @@
 import { Icon } from "leaflet";
-import userLocationMarker from "../../img/userLocationMarker.png";
-import hospitalMarker from "../../img/hospitalMarker.png";
-import capsBusStopMarker from "../../img/capsBusStopMarker.png";
-import userBusStopMarker from "../../img/userBusStopMarker.png";
+import userLocationMarker from "../../assets/img/userLocationMarker.png";
+import hospitalMarker from "../../assets/img/hospitalMarker.png";
+import capsBusStopMarker from "../../assets/img/capsBusStopMarker.png";
+import userBusStopMarker from "../../assets/img/userBusStopMarker.png";
 import { makeStyles } from "@material-ui/core/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   root: {
     position: "relative",
   },
@@ -13,24 +13,6 @@ export const useStyles = makeStyles((theme) => ({
     height: "100vh",
     width: "100%",
     zIndex: 1,
-  },
-  openOrCloseDrawerButton: {
-    top: "100px",
-    left: "5px",
-    position: "absolute",
-    zIndex: 2,
-  },
-  searchAddressPanel: {
-    top: "10px",
-    left: "6px",
-    position: "absolute",
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  searchCapsMenuButton: {
-    top: "17px",
-    right: "15px",
-    position: "absolute",
-    zIndex: 2,
   },
 }));
 

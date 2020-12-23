@@ -1,9 +1,9 @@
 import React, { useContext, useState, createContext } from "react";
-import { GetDistanceFromLatLonInM } from "../utils/distanceCalculator/DistanceCalculator";
+import GetDistanceFromLatLonInM from "../utils/distanceCalculator/DistanceCalculator";
 import { useCapsContext } from "../context/CapsContext";
 import { useSnackbar } from "notistack";
-import { GetCoordsByAddress } from "../utils/api/Api";
-import { ErrorHandler } from "../utils/errorHandler/ErrorHandler";
+import { Get } from "../utils/api/Api";
+import ErrorHandler from "../utils/errorHandler/ErrorHandler";
 
 const LocationContext = createContext();
 
@@ -27,13 +27,21 @@ export function LocationProvider(props) {
     return request_url;
   };
 
+  const GetAddressByCoords = async (coords) => {
+    const url = GetRequestUrl(coords[0] + "+" + coords[1]);
+    const result = await Get(url);
+    var resultComponent = result.results[0].components;
+    var addressNumber = resultComponent.house_number;
+    return resultComponent.road + " " + (addressNumber ? addressNumber : "");
+  };
+
   const GetUserLocationByAddressAndShowMarker = (location) => {
     if (location) {
       var direccion = encodeURI(location + ", Bahia Blanca, Argentina");
       var url = GetRequestUrl(direccion);
-      GetCoordsByAddress(url)
-        .then((res) => {
-          CreateAndShowUserMarker(res.results[0].geometry);
+      Get(url)
+        .then((response) => {
+          CreateAndShowUserMarker(response.results[0].geometry);
         })
         .catch((error) => {
           enqueueSnackbar(ErrorHandler(error), {
@@ -85,7 +93,7 @@ export function LocationProvider(props) {
 
   const GetClosestCapsByUserLocation = (userLocation) => {
     let closestCaps;
-    let capsDistance = Number.MAX_SAFE_INTEGER;
+    let capsDistance = 100000;
     backup.forEach((caps) => {
       const distance = GetDistanceFromLatLonInM(
         userLocation[0],
@@ -107,6 +115,7 @@ export function LocationProvider(props) {
     ShowClosestCapsOnMap,
     GetUserLocationByAddressAndShowMarker,
     GetUserLocationByGpsAndShowMarker,
+    GetAddressByCoords,
   };
 
   return <LocationContext.Provider value={value} {...props} />;

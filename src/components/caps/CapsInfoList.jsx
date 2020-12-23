@@ -4,7 +4,7 @@ import LocationIcon from "@material-ui/icons/LocationOn";
 import ClockIcon from "@material-ui/icons/QueryBuilder";
 import PhoneIcon from "@material-ui/icons/Phone";
 import { useCapsContext } from "../../context/CapsContext";
-import { useStyles } from "../../assets/styles/components/capsInfoStyles";
+import { useStyles } from "./Styles";
 
 const CapsInfoList = () => {
   const classes = useStyles();

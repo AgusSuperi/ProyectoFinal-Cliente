@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@sweetalert/with-react": "^0.1.1",
-    "axios": "^0.19.2",
     "classnames": "^2.2.6",
     "leaflet": "^1.7.1",
     "leaflet-routing-machine": "^3.2.12",
@@ -17,7 +16,8 @@
     "react-leaflet": "^2.8.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "swr": "^0.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +39,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000/api"
 }
