@@ -26,55 +26,34 @@ const FilterPanel = () => {
       {filterPanelOpen ? (
         <div
           className={
-            windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
+            windowWidth > ScreenSizes.Small
+              ? classes.containerLargeScreen
+              : classes.containerSmallScreen
           }
         >
-          <FilterSelect
+          <CheckBoxList
+            title="Horarios"
             items={["Las 24 hs", "08:00 a 14:00", "08:00 a 18:00"]}
-            title="¿Qué horario/s busca?"
             selectedItems={selectedHours}
             setSelectedItems={setSelectedHours}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
           />
-          <FilterSelect
-            items={neighborhoods}
-            title="¿Qué barrio/s busca?"
-            selectedItems={selectedNeighborhoods}
-            setSelectedItems={setSelectedNeighborhoods}
-          />
-          <FilterSelect
-            items={especialidades}
-            title="¿Qué especialidad/es busca?"
+          <Divider />
+          <CheckBoxList
+            title="Especialidades"
+            items={specialities}
             selectedItems={selectedSpecialities}
             setSelectedItems={setSelectedSpecialities}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
           />
-          <Grid container justify="center">
-            <ButtonTooltip
-              title="Busca los CAPS que cumplan con los criterios de búsqueda"
-              TransitionComponent={Zoom}
-              arrow
-              interactive
-              placement="right"
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() =>
-                  SearchCapsByFilters(
-                    selectedHours,
-                    selectedNeighborhoods,
-                    selectedSpecialities,
-                    setMarkers,
-                    setCapsBusStopMarkers,
-                    setUserBusStopMarkers,
-                    enqueueSnackbar
-                  )
-                }
-                className={classes.button}
-              >
-                Encontrar CAPS
-              </Button>
-            </ButtonTooltip>
-          </Grid>
+          <Divider />
+          <CheckBoxList
+            title="Barrios"
+            items={neighborhoods}
+            selectedItems={selectedNeighborhoods}
+            setSelectedItems={setSelectedNeighborhoods}
+            handleUpdateListAndFilter={handleUpdateListAndFilter}
+          />
         </div>
       ) : undefined}
     </>

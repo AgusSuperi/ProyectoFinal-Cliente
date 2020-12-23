@@ -19,14 +19,14 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   containerLargeScreen: {
-    marginTop: "100px",
+    marginTop: "60px",
     width: "95%",
-    margin: "auto"
+    margin: "auto",
   },
   containerSmallScreen: {
     marginTop: "20px",
     width: "80%",
-    margin: "auto"
+    margin: "auto",
   },
   button: {
     marginTop: 10,
