@@ -7,6 +7,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
@@ -14,6 +15,7 @@ import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 export default function MenuButton() {
   const classes = useStyles();
   const [openMenu, setOpenMenu] = useState(null);
+  const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const {
     resetMarkers,
     setDrawerOpen,
@@ -36,6 +38,8 @@ export default function MenuButton() {
   const handleShowClosestCaps = () => {
     ShowClosestCapsOnMap();
     setOpenMenu(null);
+    setCapsBusStopMarkers([]);
+    setUserBusStopMarkers([]);
   };
 
   const handleShowFilter = () => {
