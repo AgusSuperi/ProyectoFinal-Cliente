@@ -16,8 +16,8 @@ export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
   })
     .then((res) => res.json())
     .then((res) =>
-      res.length > 0
-        ? setMarkers(res)
+      res.data.length > 0
+        ? setMarkers(res.data)
         : enqueueSnackbar("No se encontraron resultados", {
             variant: "warning",
           })
@@ -30,12 +30,15 @@ export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
 };
 
 export const Get = async (url) => {
-  return await fetch(url).then((res) => res.json());
+  return await fetch(url)
+    .then((res) => res.json())
+    .then(res => res.data);
 };
 
 export const fetcher = (...args) =>
   fetch(...args)
     .then((res) => res.json())
+    .then(res => res.data)
     .catch((error) => {
       swal({
         title: ErrorHandler(error),

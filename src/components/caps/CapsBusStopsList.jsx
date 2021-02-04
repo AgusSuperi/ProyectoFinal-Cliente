@@ -16,7 +16,7 @@ const CapsBusStopsList = ({ radius }) => {
 
   useEffect(() => {
     if (selectedCaps) {
-      setClosestBuses(GetClosestCapsBusStop([selectedCaps.latitud, selectedCaps.longitud], radius));
+      setClosestBuses(GetClosestCapsBusStop([selectedCaps.latitude, selectedCaps.longitude], radius));
     }
   }, [selectedCaps, radius]);
 
@@ -24,7 +24,7 @@ const CapsBusStopsList = ({ radius }) => {
     if (selectedCaps) {
       setMarkers([selectedCaps]);
       setCapsBusStopMarkers(
-        GetClosestBusStopByLine(closestBus, [selectedCaps.latitud, selectedCaps.longitud])
+        GetClosestBusStopByLine(closestBus, [selectedCaps.latitude, selectedCaps.longitude])
       );
       if (userMarker) {
         setUserBusStopMarkers(GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng]));
@@ -36,9 +36,7 @@ const CapsBusStopsList = ({ radius }) => {
     <>
       {closestBuses.length > 0 ? (
         <>
-          <Typography variant="subtitle1">
-            Seleccione una línea para ver sus paradas cercanas
-          </Typography>
+          <Typography variant="subtitle1">Seleccione una línea para ver sus paradas cercanas</Typography>
           <div className={classes.infoContainer}>
             <List dense>
               {(closestBuses || []).map((closestBus, value) => (
@@ -58,9 +56,7 @@ const CapsBusStopsList = ({ radius }) => {
           </div>
         </>
       ) : (
-        <Typography variant="subtitle1">
-          No se encontraron colectivos en el radio seleccionado
-        </Typography>
+        <Typography variant="subtitle1">No se encontraron colectivos en el radio seleccionado</Typography>
       )}
     </>
   );

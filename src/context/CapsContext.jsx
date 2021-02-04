@@ -5,7 +5,7 @@ import { useBusContext } from "./BusContext";
 const CapsContext = createContext();
 
 export function CapsProvider(props) {
-  const { data: backup } = useSWR("/centrossalud");
+  const { data: backup } = useSWR("/medicalcenters");
   const [markers, setMarkers] = useState([]);
   const [selectedCaps, setSelectedCaps] = useState("");
   const [zoom, setZoom] = useState(13);

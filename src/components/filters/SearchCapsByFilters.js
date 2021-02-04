@@ -16,11 +16,11 @@ const SearchCapsByFilters = async (
     });
   } else {
     const data = {
-      Horarios: hoursList,
-      Barrios: neighborhoodsList,
-      Especialidades: specialitiesList,
+      OpeningHours: hoursList,
+      Neighborhoods: neighborhoodsList,
+      Specialities: specialitiesList,
     };
-    GetCapsByData(data, "/centrossalud/filtro", setMarkers, enqueueSnackbar);
+    GetCapsByData(data, "/medicalcenters/filter", setMarkers, enqueueSnackbar);
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
   }

@@ -1,34 +1,49 @@
 import React, { useState } from "react";
-import { Button, Grid, Zoom } from "@material-ui/core";
 import { useStyles } from "./Styles";
+import { Divider } from "@material-ui/core";
 import { useCapsContext } from "../../context/CapsContext";
 import { useBusContext } from "../../context/BusContext";
-import { ButtonTooltip } from "../button/Styles";
-import FilterSelect from "./FilterSelect";
-import SearchCapsByFilters from "./SearchCapsByFilters";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import CheckBoxList from "./CheckBoxList";
+import SearchCapsByFilters from "./SearchCapsByFilters";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
   const { filterPanelOpen, setMarkers, windowWidth } = useCapsContext();
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
-  const { data: especialidades } = useSWR("/especialidades");
-  const { data: neighborhoods } = useSWR("/barrios");
+  const { data: specialities } = useSWR("/specialities/names");
+  const { data: neighborhoods } = useSWR("/medicalcenters/neighborhoods");
   const [selectedSpecialities, setSelectedSpecialities] = useState([]);
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState([]);
   const [selectedHours, setSelectedHours] = useState([]);
+
+  const HandleUpdateListAndFilter = (selectedItems, setSelectedItems, item) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems(selectedItems.filter((x) => x !== item));
+    } else {
+      setSelectedItems([...selectedItems, item]);
+    }
+
+    SearchCapsByFilters(
+      selectedHours,
+      selectedNeighborhoods,
+      selectedSpecialities,
+      setMarkers,
+      setCapsBusStopMarkers,
+      setUserBusStopMarkers,
+      enqueueSnackbar
+    );
+  };
 
   return (
     <>
       {filterPanelOpen ? (
         <div
           className={
-            windowWidth > ScreenSizes.Small
-              ? classes.containerLargeScreen
-              : classes.containerSmallScreen
+            windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
           }
         >
           <CheckBoxList
@@ -36,7 +51,7 @@ const FilterPanel = () => {
             items={["Las 24 hs", "08:00 a 14:00", "08:00 a 18:00"]}
             selectedItems={selectedHours}
             setSelectedItems={setSelectedHours}
-            handleUpdateListAndFilter={handleUpdateListAndFilter}
+            handleUpdateListAndFilter={HandleUpdateListAndFilter}
           />
           <Divider />
           <CheckBoxList
@@ -44,7 +59,7 @@ const FilterPanel = () => {
             items={specialities}
             selectedItems={selectedSpecialities}
             setSelectedItems={setSelectedSpecialities}
-            handleUpdateListAndFilter={handleUpdateListAndFilter}
+            handleUpdateListAndFilter={HandleUpdateListAndFilter}
           />
           <Divider />
           <CheckBoxList
@@ -52,7 +67,7 @@ const FilterPanel = () => {
             items={neighborhoods}
             selectedItems={selectedNeighborhoods}
             setSelectedItems={setSelectedNeighborhoods}
-            handleUpdateListAndFilter={handleUpdateListAndFilter}
+            handleUpdateListAndFilter={HandleUpdateListAndFilter}
           />
         </div>
       ) : undefined}

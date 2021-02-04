@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useStyles } from "./Styles";
 import { Slider, Typography } from "@material-ui/core";
-import { SliderMarks } from "./SliderMarks";
+import SliderMarks from "./SliderMarks";
 import CapsBusStopsList from "../caps/CapsBusStopsList";
 
 export default function BusSlider() {

@@ -18,8 +18,8 @@ const SelectedCapsInformation = () => {
     var distance = GetDistanceFromLatLonInM(
       userMarker.lat,
       userMarker.lng,
-      selectedCaps.latitud,
-      selectedCaps.longitud
+      selectedCaps.latitude,
+      selectedCaps.longitude
     );
     var distanceRounded = Math.round(distance);
     return (
@@ -43,13 +43,13 @@ const SelectedCapsInformation = () => {
             }
           >
             <img
-              src={"http://localhost:5000/api/imagenes/" + selectedCaps.imagenURL}
+              src={"http://localhost:5000/api/images/" + selectedCaps.imageURL}
               alt="Foto del CAPS"
               className={classes.image}
             />
           </div>
           <div className={classes.title}>
-            <Typography variant="h5">{selectedCaps.nombre}</Typography>
+            <Typography variant="h5">{selectedCaps.name}</Typography>
             {userMarker ? GetDistanceBetweenSelectedCapsAndUserLocation() : undefined}
           </div>
           <hr />

@@ -19,7 +19,7 @@ const FilterSelect = ({ items, title, selectedItems, setSelectedItems }) => {
   };
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={classes.formControlMobile}>
       <InputLabel>{title}</InputLabel>
       <Select
         multiple

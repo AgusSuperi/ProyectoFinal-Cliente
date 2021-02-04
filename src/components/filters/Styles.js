@@ -5,6 +5,9 @@ const ITEM_PADDING_TOP = 8;
 
 export const useStyles = makeStyles((theme) => ({
   formControl: {
+    margin: theme.spacing(2),
+  },
+  formControlMobile: {
     width: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -30,6 +33,24 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     marginTop: 10,
+  },
+  root: {
+    display: "flex",
+  },  
+  showMoreOrLessText: {
+    cursor: "pointer",
+    color: "#1B69B7",
+    fontWeight: "bold",
+    "&:hover": {
+      color: "#094077",
+    },
+  },
+  showMoreOrLessIcon: {
+    cursor: "pointer",
+  },
+  formLabel: {
+    color: "grey",
+    fontWeight: "bold",
   },
 }));
 

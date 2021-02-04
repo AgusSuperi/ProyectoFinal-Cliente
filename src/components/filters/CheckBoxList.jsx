@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -7,30 +6,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  formControl: {
-    margin: theme.spacing(2),
-  },
-  showMoreOrLessText: {
-    cursor: "pointer",
-    color: "#1B69B7",
-    fontWeight: "bold",
-    "&:hover": {
-      color: "#094077",
-    },
-  },
-  showMoreOrLessIcon: {
-    cursor: "pointer",
-  },
-  formLabel: {
-    color: "grey",
-    fontWeight: "bold",
-  },
-}));
+import { useStyles } from "./Styles";
 
 export default function CheckboxesGroup({
   title,
@@ -62,7 +38,7 @@ export default function CheckboxesGroup({
       <FormControl className={classes.formControl}>
         <Typography className={classes.formLabel}>{title}</Typography>
         <FormGroup>
-          {(items.slice(0, itemsToShow) || []).map((item, value) => (
+          {(items ? items.slice(0, itemsToShow) : []).map((item, value) => (
             <FormControlLabel
               key={value}
               control={
@@ -77,7 +53,7 @@ export default function CheckboxesGroup({
             />
           ))}
         </FormGroup>
-        {items.length > 5 ? (
+        {(items ? items.length : 0) > 5 ? (
           <span className="btn btn-primary" onClick={handleShowMoreOrLess}>
             {isExpanded ? (
               <Grid container alignItems="center">

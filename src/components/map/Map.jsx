@@ -46,7 +46,7 @@ export default function CityMap() {
         {(markers || []).map((capsMarker) => (
           <Marker
             key={capsMarker.id}
-            position={[capsMarker.latitud, capsMarker.longitud]}
+            position={[capsMarker.latitude, capsMarker.longitude]}
             icon={capsMarker.selected ? capsIconBigger : capsIcon}
             onClick={() => handleSelectMarker(capsMarker)}
           />

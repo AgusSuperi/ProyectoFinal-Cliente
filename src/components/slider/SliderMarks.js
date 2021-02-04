@@ -1,4 +1,4 @@
-export const SliderMarks = [
+const SliderMarks = [
   {
     value: 0,
     label: "1",
@@ -24,3 +24,5 @@ export const SliderMarks = [
     label: "6",
   },
 ];
+
+export default SliderMarks;

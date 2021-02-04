@@ -19,19 +19,24 @@ const CapsInfoList = () => {
               <ListItemIcon>
                 <LocationIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.direccion} />
+              <ListItemText primary={selectedCaps.address} />
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <ClockIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.horarioAtencion} />
+              <ListItemText primary={selectedCaps.openingHours} />
             </ListItem>
-            <ListItem button component="a" href={"tel:" + selectedCaps.telefono} className={classes.listItem}>
+            <ListItem
+              button
+              component="a"
+              href={"tel:" + selectedCaps.phoneNumber}
+              className={classes.listItem}
+            >
               <ListItemIcon>
                 <PhoneIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.telefono} />
+              <ListItemText primary={selectedCaps.phoneNumber} />
             </ListItem>
           </List>
         </div>

@@ -6,7 +6,7 @@ import useSWR from "swr";
 
 const CapsSpecialitiesList = () => {
   const { selectedCaps } = useCapsContext();
-  const { data: specialities } = useSWR(`/centrossalud/${selectedCaps.id}/especialidades`);
+  const { data: specialities } = useSWR(`/medicalcenters/${selectedCaps.id}/specialities`);
 
   return (
     <div>
@@ -18,7 +18,7 @@ const CapsSpecialitiesList = () => {
                 <ListItemIcon>
                   <ArrowIcon />
                 </ListItemIcon>
-                <ListItemText primary={speciality.nombre} />
+                <ListItemText primary={speciality.name} />
               </ListItem>
             ))}
           </List>

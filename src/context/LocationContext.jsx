@@ -98,8 +98,8 @@ export function LocationProvider(props) {
       const distance = GetDistanceFromLatLonInM(
         userLocation[0],
         userLocation[1],
-        caps.latitud,
-        caps.longitud
+        caps.latitude,
+        caps.longitude
       );
       if (distance < capsDistance) {
         closestCaps = { ...caps };
