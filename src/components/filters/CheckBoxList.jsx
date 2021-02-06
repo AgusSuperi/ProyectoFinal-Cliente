@@ -8,19 +8,13 @@ import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useStyles } from "./Styles";
 
-export default function CheckboxesGroup({
-  title,
-  items,
-  selectedItems,
-  setSelectedItems,
-  handleUpdateListAndFilter,
-}) {
+export default function CheckboxesGroup({ title, items, selectedItems, setSelectedItems, handleUpdateList }) {
   const classes = useStyles();
   const [itemsToShow, setItemsToShow] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleChange = (event) => {
-    handleUpdateListAndFilter(selectedItems, setSelectedItems, event.target.name);
+    handleUpdateList(selectedItems, setSelectedItems, event.target.name);
   };
 
   const handleShowMoreOrLess = () => {

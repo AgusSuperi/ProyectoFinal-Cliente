@@ -15,13 +15,20 @@ export const GetCapsByData = (data, path, setMarkers, enqueueSnackbar) => {
     body: JSON.stringify(data),
   })
     .then((res) => res.json())
-    .then((res) =>
-      res.data.length > 0
-        ? setMarkers(res.data)
-        : enqueueSnackbar("No se encontraron resultados", {
-            variant: "warning",
-          })
-    )
+    .then((res) => 
+    {
+      if (res.data.length > 0)
+      {
+        setMarkers(res.data);
+      }
+      else 
+      {
+        setMarkers([]);
+        enqueueSnackbar("No se encontraron resultados", {
+          variant: "warning",
+        })
+      }
+    })
     .catch((error) => {
       enqueueSnackbar(ErrorHandler(error), {
         variant: "error",

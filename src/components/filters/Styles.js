@@ -22,9 +22,10 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
   containerLargeScreen: {
-    marginTop: "60px",
+    marginTop: "10px",
     width: "95%",
     margin: "auto",
+    overflow:"auto",
   },
   containerSmallScreen: {
     marginTop: "20px",
@@ -51,6 +52,18 @@ export const useStyles = makeStyles((theme) => ({
   formLabel: {
     color: "grey",
     fontWeight: "bold",
+  },
+  searchButton: {
+    margin: theme.spacing(1),
+  },
+  buttonContainerLargeScreen: {
+    marginTop: "70px",
+    textAlign: "left",
+  },
+  buttonContainerSmallScreen: {
+    marginTop: "20px",
+    width: "80%",
+    margin: "auto",
   },
 }));
 

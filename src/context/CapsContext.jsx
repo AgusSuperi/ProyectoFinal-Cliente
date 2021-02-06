@@ -42,7 +42,6 @@ export function CapsProvider(props) {
     }
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
-    setDrawerOpen(false);
   };
 
   const value = {
