@@ -8,6 +8,7 @@ import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import TourConfig from "./TourConfig";
 import "../Styles.css";
+import WelcomeDialog from "./WelcomeDialog";
 
 export default function Layout() {
   const classes = useStyles();
@@ -15,10 +16,11 @@ export default function Layout() {
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const accentColor = "#5cb7b7";
-  const [isTourOpen, setTourIsOpen] = useState(true);
+  const [isTourOpen, setTourIsOpen] = useState(false);
 
   return (
     <div className={classes.root}>
+      <WelcomeDialog setTourIsOpen={setTourIsOpen} />
       <DrawerPanel />
       <main
         className={

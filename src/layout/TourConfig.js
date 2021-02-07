@@ -1,21 +1,22 @@
 const TourConfig = [
     {
-        selector: '[data-tut="reactour__menuButton"]',
-        content: `Ok, let's start with the name of the Tour that is about to begin.`,
-        observe: '[data-tut="reactour__menuButton--observe"]'
-    },
+        selector: '[data-tut="reactour__marker"]',
+        content: `Explicar que los marcadores se pueden cliquear 
+        y poner una foto de los marcadores y que cada uno muestra info relacionada al caps`,
+    },    
     {
         selector: '[data-tut="reactour__searchBar"]',
-        content: `Ola`,
+        content: `explicar que puede poner su ubicacion actual`,
     },
     {
         selector: '[data-tut="reactour__autoLocationButton"]',
-        content: `Ola`,
-    },
+        content: `autolocalizacion PERO SOLO PARA MOVILE`,
+    },   
     {
-        selector: '[data-tut="reactour__marker"]',
-        content: `Ola`,
-    },        
+        selector: '[data-tut="reactour__menuButton"]',
+        content: `ver si anda, explicar lo que tiene adentro `,
+        observe: '[data-tut="reactour__menuButton--observe"]'
+    }, 
   ];
 
   export default TourConfig;
