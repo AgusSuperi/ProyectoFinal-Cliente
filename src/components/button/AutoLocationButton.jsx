@@ -18,7 +18,12 @@ const AutoLocationButton = () => {
         interactive
         placement="bottom"
       >
-        <Fab color="primary" size="small" onClick={GetUserLocationByGpsAndShowMarker}>
+        <Fab
+          color="primary"
+          size="small"
+          onClick={GetUserLocationByGpsAndShowMarker}
+          data-tut="reactour__autoLocationButton"
+        >
           <MyLocationIcon />
         </Fab>
       </ButtonTooltip>

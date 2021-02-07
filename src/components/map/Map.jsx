@@ -37,7 +37,7 @@ export default function CityMap() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-tut="reactour__marker">
       <Map animate={true} center={mapCenter} zoom={zoom} className={classes.map} zoomControl={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

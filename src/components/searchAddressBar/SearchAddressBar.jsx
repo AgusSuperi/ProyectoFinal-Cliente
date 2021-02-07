@@ -20,7 +20,7 @@ const SearchAddressBar = () => {
   };
 
   return (
-    <div className={classes.searchAddressPanel}>
+    <div className={classes.searchAddressPanel} data-tut="reactour__searchBar">
       <div
         className={windowWidth > ScreenSizes.Small ? classes.searchLargeScreen : classes.searchSmallScreen}
       >

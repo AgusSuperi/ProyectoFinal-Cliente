@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Button, Fab, ListItemIcon, ListItemText } from "@material-ui/core";
+import { Fab, ListItemIcon, ListItemText } from "@material-ui/core";
 import { StyledMenu, StyledMenuItem, useStyles } from "./Styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NearMeIcon from "@material-ui/icons/NearMe";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import VisibilityIcon from "@material-ui/icons/Visibility";
 import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
@@ -55,23 +55,33 @@ export default function MenuButton() {
   return (
     <div className={classes.MenuButton}>
       {windowWidth > ScreenSizes.Small ? (
-        <Button
-          startIcon={<VisibilityIcon />}
-          endIcon={<ExpandMoreIcon />}
-          size="small"
-          variant="contained"
+        <Fab
+          size="medium"
+          variant="extended"
           color="primary"
           onClick={handleOpenMenu}
+          data-tut="reactour__menuButton"
         >
           Mostrar CAPS
-        </Button>
+          {openMenu ? (
+            <ExpandLessIcon className={classes.menuButtonExtendedIcon} />
+          ) : (
+            <ExpandMoreIcon className={classes.menuButtonExtendedIcon} />
+          )}
+        </Fab>
       ) : (
-        <Fab color="primary" size="small" onClick={handleOpenMenu}>
+        <Fab color="primary" size="small" onClick={handleOpenMenu} data-tut="reactour__menuButton">
           <MoreVertIcon />
         </Fab>
       )}
 
-      <StyledMenu anchorEl={openMenu} keepMounted open={Boolean(openMenu)} onClose={() => setOpenMenu(null)}>
+      <StyledMenu
+        anchorEl={openMenu}
+        keepMounted
+        open={Boolean(openMenu)}
+        onClose={() => setOpenMenu(null)}
+        data-tut="reactour__menuButton--observe"
+      >
         <StyledMenuItem onClick={handleShowClosestCaps}>
           <ListItemIcon className={classes.icon}>
             <NearMeIcon fontSize="small" />
