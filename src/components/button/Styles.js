@@ -47,6 +47,7 @@ export const useStyles = makeStyles((theme) => ({
     right: "15px",
     position: "absolute",
     zIndex: 2,
+    textAlign: "right"
   },
   icon: {
     color: "white",
@@ -54,6 +55,13 @@ export const useStyles = makeStyles((theme) => ({
   menuButtonExtendedIcon: {
     marginLeft: theme.spacing(1),
   },
+  menuButtonContainer:{
+    backgroundColor: "black",
+    marginTop: "10px"
+  },
+  listItemText:{
+    color: "white"
+  }
 }));
 
 export const ButtonTooltip = withStyles({

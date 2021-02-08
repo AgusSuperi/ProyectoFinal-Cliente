@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Fab, ListItemIcon, ListItemText } from "@material-ui/core";
+import { ClickAwayListener, Fab, ListItemIcon, ListItemText } from "@material-ui/core";
 import { StyledMenu, StyledMenuItem, useStyles } from "./Styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
@@ -14,7 +14,7 @@ import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 
 export default function MenuButton() {
   const classes = useStyles();
-  const [openMenu, setOpenMenu] = useState(null);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const {
     resetMarkers,
@@ -26,18 +26,18 @@ export default function MenuButton() {
   } = useCapsContext();
   const { ShowClosestCapsOnMap } = useLocationContext();
 
-  const handleOpenMenu = (event) => {
-    setOpenMenu(event.currentTarget);
+  const handleOpenCloseMenu = () => {
+    setMenuIsOpen(!menuIsOpen);
   };
 
   const handleShowAllCaps = () => {
     resetMarkers();
-    setOpenMenu(null);
+    setMenuIsOpen(false);
   };
 
   const handleShowClosestCaps = () => {
     ShowClosestCapsOnMap();
-    setOpenMenu(null);
+    setMenuIsOpen(false);
     setCapsBusStopMarkers([]);
     setUserBusStopMarkers([]);
   };
@@ -49,58 +49,58 @@ export default function MenuButton() {
     setFilterPanelOpen(true);
     setSelectedCaps("");
     setDrawerOpen(true);
-    setOpenMenu(null);
+    setMenuIsOpen(false);
   };
 
   return (
-    <div className={classes.MenuButton}>
-      {windowWidth > ScreenSizes.Small ? (
-        <Fab
-          size="medium"
-          variant="extended"
-          color="primary"
-          onClick={handleOpenMenu}
-          data-tut="reactour__menuButton"
-        >
-          Mostrar CAPS
-          {openMenu ? (
-            <ExpandLessIcon className={classes.menuButtonExtendedIcon} />
-          ) : (
-            <ExpandMoreIcon className={classes.menuButtonExtendedIcon} />
-          )}
-        </Fab>
-      ) : (
-        <Fab color="primary" size="small" onClick={handleOpenMenu} data-tut="reactour__menuButton">
-          <MoreVertIcon />
-        </Fab>
-      )}
+    <ClickAwayListener onClickAway={() => setMenuIsOpen(false)}>
+      <div className={classes.MenuButton}>
+        {windowWidth > ScreenSizes.Small ? (
+          <Fab
+            size="medium"
+            variant="extended"
+            color="primary"
+            onClick={handleOpenCloseMenu}
+            data-tut="reactour__menuButton"
+          >
+            Mostrar CAPS
+            {menuIsOpen ? (
+              <ExpandLessIcon className={classes.menuButtonExtendedIcon} />
+            ) : (
+              <ExpandMoreIcon className={classes.menuButtonExtendedIcon} />
+            )}
+          </Fab>
+        ) : (
+          <Fab color="primary" size="small" onClick={handleOpenCloseMenu} data-tut="reactour__menuButton">
+            <MoreVertIcon />
+          </Fab>
+        )}
 
-      <StyledMenu
-        anchorEl={openMenu}
-        keepMounted
-        open={Boolean(openMenu)}
-        onClose={() => setOpenMenu(null)}
-        data-tut="reactour__menuButton--observe"
-      >
-        <StyledMenuItem onClick={handleShowClosestCaps}>
-          <ListItemIcon className={classes.icon}>
-            <NearMeIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Más cercano" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleShowAllCaps}>
-          <ListItemIcon className={classes.icon}>
-            <LocationOnIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Todos" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={handleShowFilter}>
-          <ListItemIcon className={classes.icon}>
-            <FilterListIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Filtrar" />
-        </StyledMenuItem>
-      </StyledMenu>
-    </div>
+        <div className={classes.MenuItemContainer} data-tut="reactour__menuButton--observe">
+          {menuIsOpen && (
+            <div className={classes.menuButtonContainer}>
+              <StyledMenuItem onClick={handleShowClosestCaps}>
+                <ListItemIcon className={classes.icon}>
+                  <NearMeIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText primary="Más cercano" className={classes.listItemText} />
+              </StyledMenuItem>
+              <StyledMenuItem onClick={handleShowAllCaps}>
+                <ListItemIcon className={classes.icon}>
+                  <LocationOnIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText primary="Todos" className={classes.listItemText} />
+              </StyledMenuItem>
+              <StyledMenuItem onClick={handleShowFilter}>
+                <ListItemIcon className={classes.icon}>
+                  <FilterListIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText primary="Filtrar" className={classes.listItemText} />
+              </StyledMenuItem>
+            </div>
+          )}
+        </div>
+      </div>
+    </ClickAwayListener>
   );
 }
