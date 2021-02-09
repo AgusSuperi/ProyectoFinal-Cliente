@@ -24,6 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     left: "6px",
     position: "absolute",
     zIndex: theme.zIndex.drawer + 1,
+    opacity: 0.95
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -38,7 +39,7 @@ export const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInputLargeScreen: {
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    paddingLeft: "25px",
     width: "270px",
     height: "4.5ch",
   },

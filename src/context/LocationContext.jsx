@@ -2,7 +2,7 @@ import React, { useContext, useState, createContext } from "react";
 import GetDistanceFromLatLonInM from "../utils/distanceCalculator/DistanceCalculator";
 import { useCapsContext } from "../context/CapsContext";
 import { useSnackbar } from "notistack";
-import { Get } from "../utils/api/Api";
+import { Get, GetResult } from "../utils/api/Api";
 import ErrorHandler from "../utils/errorHandler/ErrorHandler";
 
 const LocationContext = createContext();
@@ -39,7 +39,7 @@ export function LocationProvider(props) {
     if (location) {
       var direccion = encodeURI(location + ", Bahia Blanca, Argentina");
       var url = GetRequestUrl(direccion);
-      Get(url)
+      GetResult(url)
         .then((response) => {
           CreateAndShowUserMarker(response.results[0].geometry);
         })

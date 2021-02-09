@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ClickAwayListener, Fab, ListItemIcon, ListItemText } from "@material-ui/core";
-import { StyledMenu, StyledMenuItem, useStyles } from "./Styles";
+import { StyledMenuItem, useStyles } from "./Styles";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import NearMeIcon from "@material-ui/icons/NearMe";

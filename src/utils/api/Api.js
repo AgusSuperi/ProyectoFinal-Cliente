@@ -42,6 +42,11 @@ export const Get = async (url) => {
     .then(res => res.data);
 };
 
+export const GetResult = async (url) => {
+  return await fetch(url)
+    .then((res) => res.json());
+};
+
 export const fetcher = (...args) =>
   fetch(...args)
     .then((res) => res.json())

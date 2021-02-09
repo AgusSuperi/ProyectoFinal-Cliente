@@ -6,7 +6,7 @@ import { useCapsContext } from "../context/CapsContext";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import TourConfig from "./TourConfig";
+import { Desktop, Mobile } from "./TourConfigMain";
 import "../Styles.css";
 import WelcomeDialog from "./WelcomeDialog";
 
@@ -31,7 +31,7 @@ export default function Layout() {
       </main>
       <Tour
         onRequestClose={() => setTourIsOpen(false)}
-        steps={TourConfig}
+        steps={windowWidth > ScreenSizes.Small ? Desktop : Mobile}
         isOpen={isTourOpen}
         className="helper"
         rounded={5}

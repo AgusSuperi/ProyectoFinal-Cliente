@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "20px",
     width: "80%",
     margin: "auto",
+    overflow:"auto",
   },
   button: {
     marginTop: 10,

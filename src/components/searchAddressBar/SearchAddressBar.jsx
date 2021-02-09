@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { InputBase } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 import { useLocationContext } from "../../context/LocationContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useStyles } from "./Styles";
 import AutoLocationButton from "../button/AutoLocationButton";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import SearchButton from "../button/SearchButton";
+import SearchIcon from "@material-ui/icons/Search";
 
 const SearchAddressBar = () => {
   const classes = useStyles();
@@ -24,11 +25,16 @@ const SearchAddressBar = () => {
       <div
         className={windowWidth > ScreenSizes.Small ? classes.searchLargeScreen : classes.searchSmallScreen}
       >
-        <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div>
+        {windowWidth > ScreenSizes.Small ? null : (
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+        )}
+
         <InputBase
-          placeholder="Ingrese su ubicación"
+          placeholder={
+            windowWidth > ScreenSizes.Small ? "Ingrese su ubicación actual" : "Ingrese su ubicación"
+          }
           classes={{
             root: classes.inputRoot,
             input:
@@ -37,8 +43,9 @@ const SearchAddressBar = () => {
           onChange={(event) => setLocation(event.target.value)}
           onKeyPress={handleEnterKeyPress}
         />
+
         <div className={classes.headerDivider} />
-        <AutoLocationButton />
+        {windowWidth > ScreenSizes.Small ? <SearchButton location={location} /> : <AutoLocationButton />}
       </div>
     </div>
   );
