@@ -34,7 +34,7 @@ const SelectedCapsInformation = () => {
   return (
     <>
       {selectedCaps ? (
-        <div>
+        <div className={classes.capsInformationContainer}>
           <div
             className={
               windowWidth > ScreenSizes.Small

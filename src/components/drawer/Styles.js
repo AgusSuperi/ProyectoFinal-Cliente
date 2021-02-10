@@ -8,17 +8,21 @@ export const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
   },
   bottomDrawer: {
-    height: "40%",
+    height: "50%",
     width: "100%",
     bottom: 0,
     left: 0,
     position: "absolute",
     zIndex: 2,
-    overflow: "auto",
+    display: "flex",
+    flexDirection: "column",
     backgroundColor: "white",
   },
   drawerPaper: {
     width: drawerWidth,
+  },
+  capsInformationContainer: {
+    overflow: "auto"
   },
   drawerHeader: {
     display: "flex",

@@ -25,13 +25,13 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
     width: "95%",
     margin: "auto",
-    overflow:"auto",
+    overflow: "auto",
   },
   containerSmallScreen: {
     marginTop: "20px",
-    width: "80%",
+    width: "100%",
     margin: "auto",
-    overflow:"auto",
+    overflow: "auto",
   },
   button: {
     marginTop: 10,
