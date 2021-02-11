@@ -6,7 +6,7 @@ import { useCapsContext } from "../context/CapsContext";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-import { Desktop, Mobile } from "./TourConfigMain";
+import { Desktop, Mobile } from "../tour/MainTourConfig";
 import "../Styles.css";
 import WelcomeDialog from "./WelcomeDialog";
 

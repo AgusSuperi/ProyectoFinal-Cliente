@@ -15,6 +15,7 @@ import { useLocationContext } from "../../context/LocationContext";
 import DrawerButton from "../button/DrawerButton";
 import MenuButton from "../button/MenuButton";
 import SearchAddressBar from "../searchAddressBar/SearchAddressBar";
+import TourSelector from "../../tour/TourSelector";
 
 export default function CityMap() {
   const classes = useStyles();
@@ -37,7 +38,7 @@ export default function CityMap() {
   };
 
   return (
-    <div className={classes.root} data-tut="reactour__marker">
+    <div className={classes.root}>
       <Map animate={true} center={mapCenter} zoom={zoom} className={classes.map} zoomControl={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -69,6 +70,7 @@ export default function CityMap() {
       <DrawerButton />
       <MenuButton />
       <SearchAddressBar />
+      <TourSelector />
     </div>
   );
 }

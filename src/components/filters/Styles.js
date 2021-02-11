@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   buttonContainerSmallScreen: {
     marginTop: "20px",
-    width: "80%",
+    width: "100%",
     margin: "auto",
   },
 }));

@@ -7,8 +7,19 @@ export const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
   },
-  bottomDrawer: {
+  bottomDrawerCollapsed: {
     height: "50%",
+    width: "100%",
+    bottom: 0,
+    left: 0,
+    position: "absolute",
+    zIndex: 2,
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "white",
+  },
+  bottomDrawerExpanded: {
+    height: "85%",
     width: "100%",
     bottom: 0,
     left: 0,
