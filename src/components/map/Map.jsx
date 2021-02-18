@@ -15,7 +15,6 @@ import { useLocationContext } from "../../context/LocationContext";
 import DrawerButton from "../button/DrawerButton";
 import MenuButton from "../button/MenuButton";
 import SearchAddressBar from "../searchAddressBar/SearchAddressBar";
-import TourSelector from "../../tour/TourSelector";
 
 export default function CityMap() {
   const classes = useStyles();
@@ -70,7 +69,6 @@ export default function CityMap() {
       <DrawerButton />
       <MenuButton />
       <SearchAddressBar />
-      <TourSelector />
     </div>
   );
 }
