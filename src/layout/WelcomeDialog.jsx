@@ -31,7 +31,7 @@ export default function WelcomeDialog({ setTourIsOpen }) {
           <br />
           <br />
           <span className={classes.dialogText}>
-            Desea realizar un breve recorrido para conocer más la aplicación?
+            <b>¿Desea realizar un breve recorrido para conocer más la aplicación?</b>
           </span>
         </DialogContent>
         <DialogActions>

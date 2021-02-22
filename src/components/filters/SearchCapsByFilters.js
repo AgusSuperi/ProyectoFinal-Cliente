@@ -1,7 +1,7 @@
 import { GetCapsByData } from "../../utils/api/Api";
 
 const SearchCapsByFilters = async (
-  hoursList,
+  openingHours,
   neighborhoodsList,
   specialitiesList,
   setMarkers,
@@ -10,7 +10,7 @@ const SearchCapsByFilters = async (
   enqueueSnackbar
 ) => {
   const data = {
-    OpeningHours: hoursList,
+    OpeningHours: openingHours,
     Neighborhoods: neighborhoodsList,
     Specialities: specialitiesList,
   };

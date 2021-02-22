@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { Grid, Typography } from "@material-ui/core";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography } from "@material-ui/core";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useStyles } from "./Styles";
 
-export default function CheckboxesGroup({ title, items, selectedItems, setSelectedItems, handleUpdateList }) {
+export default function CheckBoxList({ title, items, selectedItems, setSelectedItems, handleUpdateList }) {
   const classes = useStyles();
   const [itemsToShow, setItemsToShow] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);

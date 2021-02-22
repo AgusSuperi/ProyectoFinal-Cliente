@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useStyles } from "./Styles";
 import { Button, Divider, Fab } from "@material-ui/core";
 import { useCapsContext } from "../../context/CapsContext";
@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import CheckBoxList from "./CheckBoxList";
 import SearchCapsByFilters from "./SearchCapsByFilters";
+import RadioButtonList from "./RadioButtonList";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -16,10 +17,10 @@ const FilterPanel = () => {
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
   const { data: specialities } = useSWR("/specialities/names");
   const { data: neighborhoods } = useSWR("/medicalcenters/neighborhoods");
+  const { data: filterOpeningHours } = useSWR("/medicalcenters/filterOpeningHours");
   const [selectedSpecialities, setSelectedSpecialities] = useState([]);
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState([]);
-  const [selectedHours, setSelectedHours] = useState([]);
-  const [disabled, setDisabled] = useState(true);
+  const [selectedFilterOpeningHours, setSelectedFilterOpeningHours] = useState("08:00 a 14:00");
 
   const HandleUpdateList = (selectedItems, setSelectedItems, item) => {
     if (selectedItems.includes(item)) {
@@ -30,17 +31,11 @@ const FilterPanel = () => {
   };
 
   const HandleClearFilters = () => {
-    setSelectedHours([]);
+    setSelectedFilterOpeningHours("08:00 a 14:00");
     setSelectedNeighborhoods([]);
     setSelectedSpecialities([]);
     resetMarkers();
   };
-
-  useEffect(() => {
-    if (!selectedHours.length && !selectedSpecialities.length && !selectedNeighborhoods.length) {
-      setDisabled(true);
-    } else setDisabled(false);
-  }, [selectedHours, selectedSpecialities, selectedNeighborhoods]);
 
   return (
     <>
@@ -58,10 +53,9 @@ const FilterPanel = () => {
               size="medium"
               color="primary"
               aria-label="add"
-              disabled={disabled}
               onClick={() =>
                 SearchCapsByFilters(
-                  selectedHours,
+                  selectedFilterOpeningHours,
                   selectedNeighborhoods,
                   selectedSpecialities,
                   setMarkers,
@@ -74,21 +68,18 @@ const FilterPanel = () => {
             >
               Buscar
             </Fab>
-            <Button disabled={disabled} onClick={() => HandleClearFilters()}>
-              Limpiar
-            </Button>
+            <Button onClick={() => HandleClearFilters()}>Limpiar</Button>
           </div>
           <div
             className={
               windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
             }
           >
-            <CheckBoxList
+            <RadioButtonList
               title="Horarios"
-              items={["Las 24 hs", "08:00 a 14:00", "08:00 a 18:00"]}
-              selectedItems={selectedHours}
-              setSelectedItems={setSelectedHours}
-              handleUpdateList={HandleUpdateList}
+              items={filterOpeningHours}
+              selectedItem={selectedFilterOpeningHours}
+              setSelectedItem={setSelectedFilterOpeningHours}
             />
             <Divider />
             <CheckBoxList
