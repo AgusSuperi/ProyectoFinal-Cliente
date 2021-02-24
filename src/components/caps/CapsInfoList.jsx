@@ -3,12 +3,12 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import LocationIcon from "@material-ui/icons/LocationOn";
 import ClockIcon from "@material-ui/icons/QueryBuilder";
 import PhoneIcon from "@material-ui/icons/Phone";
-import { useCapsContext } from "../../context/CapsContext";
+import { useSelector } from "react-redux";
 import { useStyles } from "./Styles";
 
 const CapsInfoList = () => {
   const classes = useStyles();
-  const { selectedCaps } = useCapsContext();
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
 
   return (
     <>

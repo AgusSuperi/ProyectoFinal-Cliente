@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStyles } from "./Styles";
 import DrawerPanel from "../components/drawer/DrawerPanel";
 import Map from "../components/map/Map";
@@ -9,14 +9,23 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { Desktop, Mobile } from "../tour/MainTourConfig";
 import "../Styles.css";
 import WelcomeDialog from "./WelcomeDialog";
+import { useDispatch } from "react-redux";
+import useSWR from "swr";
+import { setCaps } from "../actions/CapsActions";
 
 export default function Layout() {
   const classes = useStyles();
+  const { data: caps } = useSWR("/medicalcenters");
   const { windowWidth } = useCapsContext();
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const accentColor = "#5cb7b7";
   const [isTourOpen, setTourIsOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCaps(caps));
+  }, [dispatch, caps]);
 
   return (
     <div className={classes.root}>

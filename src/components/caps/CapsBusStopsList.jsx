@@ -6,12 +6,14 @@ import { GetClosestBusStopByLine, GetClosestCapsBusStop } from "../../utils/buse
 import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
+import { useSelector } from "react-redux";
 
 const CapsBusStopsList = ({ radius }) => {
   const classes = useStyles();
   const [closestBuses, setClosestBuses] = useState([]);
-  const { selectedCaps, setMarkers } = useCapsContext();
+  const { setMarkers } = useCapsContext();
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
   const { userMarker } = useLocationContext();
 
   useEffect(() => {

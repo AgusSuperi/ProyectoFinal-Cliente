@@ -5,12 +5,14 @@ import { useCapsContext } from "../../context/CapsContext";
 import FilterPanel from "../filters/FilterPanel";
 import SelectedCapsInformation from "./SelectedCapsInformation";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import { useSelector } from "react-redux";
 import ExpandMobileDrawer from "../button/ExpandMobileDrawer";
 
 const DrawerPanel = () => {
   const classes = useStyles();
-  const { CloseBottomDrawer, drawerOpen, filterPanelOpen, selectedCaps, windowWidth } = useCapsContext();
+  const { CloseBottomDrawer, drawerOpen, filterPanelOpen, windowWidth } = useCapsContext();
   const [drawerIsExpanded, setDrawerIsExpanded] = useState(false);
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
 
   if (windowWidth > ScreenSizes.Small) {
     return (

@@ -2,11 +2,11 @@ import React from "react";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
 import ArrowIcon from "@material-ui/icons/ArrowRight";
-import { useCapsContext } from "../../context/CapsContext";
+import { useSelector } from "react-redux";
 import useSWR from "swr";
 
 const CapsSpecialitiesList = () => {
-  const { selectedCaps } = useCapsContext();
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
   const { data: specialities } = useSWR(`/medicalcenters/${selectedCaps.id}/specialities`);
 
   if (!specialities) {

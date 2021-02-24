@@ -1,19 +1,22 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 import useSWR from "swr";
 import { useBusContext } from "./BusContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCaps } from "../actions/CapsActions";
 
 const CapsContext = createContext();
 
 export function CapsProvider(props) {
   const { data: backup } = useSWR("/medicalcenters");
   const [markers, setMarkers] = useState([]);
-  const [selectedCaps, setSelectedCaps] = useState("");
   const [zoom, setZoom] = useState(13);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [mapCenter, setMapCenter] = useState([-38.725151, -62.254951]);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
+  const dispatch = useDispatch();
 
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
@@ -32,7 +35,7 @@ export function CapsProvider(props) {
       selectedCaps.selected = false;
     }
     setFilterPanelOpen(false);
-    setSelectedCaps("");
+    dispatch(setSelectedCaps(""));
     setDrawerOpen(false);
   };
 
@@ -52,12 +55,10 @@ export function CapsProvider(props) {
     mapCenter,
     CloseBottomDrawer,
     resetMarkers,
-    selectedCaps,
     setDrawerOpen,
     setFilterPanelOpen,
     setMarkers,
     setMapCenter,
-    setSelectedCaps,
     setZoom,
     windowWidth,
     zoom,

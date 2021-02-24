@@ -6,13 +6,15 @@ import { useLocationContext } from "../../context/LocationContext";
 import DrawerBottomNavigation from "./DrawerBottomNavigation";
 import TabPanels from "../tabPanel/TabPanels";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import { useSelector } from "react-redux";
 import GetDistanceFromLatLonInM from "../../utils/distanceCalculator/DistanceCalculator";
 
 const SelectedCapsInformation = () => {
   const classes = useStyles();
-  const { selectedCaps, windowWidth } = useCapsContext();
+  const { windowWidth } = useCapsContext();
   const { userMarker } = useLocationContext();
   const [selectedTab, setSelectedTab] = useState(0);
+  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
 
   const GetDistanceBetweenSelectedCapsAndUserLocation = () => {
     var distance = GetDistanceFromLatLonInM(
