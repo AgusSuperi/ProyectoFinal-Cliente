@@ -9,29 +9,28 @@ import {
   useStyles,
 } from "./Styles";
 import BusMarkerPopup from "../markerPopUp/BusMarkerPopup";
-import { useBusContext } from "../../context/BusContext";
-import { useCapsContext } from "../../context/CapsContext";
-import { useLocationContext } from "../../context/LocationContext";
 import DrawerButton from "../button/DrawerButton";
 import MenuButton from "../button/MenuButton";
 import SearchAddressBar from "../searchAddressBar/SearchAddressBar";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCaps } from "../../actions/CapsActions";
+import { setSelectedMarker } from "../../actions/MapActions";
+import { setDrawerOpen, setFilterPanelOpen } from "../../actions/DrawerActions";
 
 export default function CityMap() {
   const classes = useStyles();
-  const caps = useSelector((state) => state.caps.caps);
-  const { zoom, mapCenter, setDrawerOpen, setFilterPanelOpen } = useCapsContext();
-  const { capsBusStopMarkers, userBusStopMarkers } = useBusContext();
-  const { userMarker } = useLocationContext();
+  const markers = useSelector((state) => state.map.markers);
+  const mapCenter = useSelector((state) => state.map.mapCenter);
+  const capsBusStopMarkers = useSelector((state) => state.map.capsBusStopMarkers);
+  const userBusStopMarkers = useSelector((state) => state.map.userBusStopMarkers);
+  const userMarker = useSelector((state) => state.map.userMarker);
   const [actualMarkerSelected, setActualMarkerSelected] = useState([]);
   const dispatch = useDispatch();
 
   const handleSelectMarker = (capsMarker) => {
     changeActualMarkerSelected(capsMarker);
-    setDrawerOpen(true);
-    setFilterPanelOpen(false);
-    dispatch(setSelectedCaps(capsMarker));
+    dispatch(setDrawerOpen(true));
+    dispatch(setFilterPanelOpen(false));
+    dispatch(setSelectedMarker(capsMarker));
   };
 
   const changeActualMarkerSelected = (marker) => {
@@ -42,12 +41,12 @@ export default function CityMap() {
 
   return (
     <div className={classes.root}>
-      <Map animate={true} center={mapCenter} zoom={zoom} className={classes.map} zoomControl={false}>
+      <Map animate={true} center={mapCenter} zoom={13} className={classes.map} zoomControl={false}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        {(caps || []).map((capsMarker) => (
+        {(markers || []).map((capsMarker) => (
           <Marker
             key={capsMarker.id}
             position={[capsMarker.latitude, capsMarker.longitude]}

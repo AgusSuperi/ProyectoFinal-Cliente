@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { useStyles } from "./Styles";
 import { Button, Divider, Fab } from "@material-ui/core";
 import { useCapsContext } from "../../context/CapsContext";
-import { useBusContext } from "../../context/BusContext";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import CheckBoxList from "./CheckBoxList";
 import SearchCapsByFilters from "./SearchCapsByFilters";
 import RadioButtonList from "./RadioButtonList";
+import { useDispatch, useSelector } from "react-redux";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
-  const { filterPanelOpen, resetMarkers, setMarkers, windowWidth } = useCapsContext();
-  const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
+  const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
+  const windowWidth = useSelector((state) => state.window.windowWidth);
+  const dispatch = useDispatch();
+  const { resetMarkers } = useCapsContext();
   const { data: specialities } = useSWR("/specialities/names");
   const { data: neighborhoods } = useSWR("/medicalcenters/neighborhoods");
   const { data: filterOpeningHours } = useSWR("/medicalcenters/filterOpeningHours");
@@ -58,9 +60,7 @@ const FilterPanel = () => {
                   selectedFilterOpeningHours,
                   selectedNeighborhoods,
                   selectedSpecialities,
-                  setMarkers,
-                  setCapsBusStopMarkers,
-                  setUserBusStopMarkers,
+                  dispatch,
                   enqueueSnackbar
                 )
               }

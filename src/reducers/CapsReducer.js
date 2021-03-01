@@ -1,4 +1,4 @@
-import * as actions from "../actions/ActionTypes";
+import * as actions from "../actions/Types";
 
 const initialState = {
   caps: [],

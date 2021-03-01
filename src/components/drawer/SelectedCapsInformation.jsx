@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useStyles } from "./Styles";
 import { Typography } from "@material-ui/core";
-import { useCapsContext } from "../../context/CapsContext";
-import { useLocationContext } from "../../context/LocationContext";
 import DrawerBottomNavigation from "./DrawerBottomNavigation";
 import TabPanels from "../tabPanel/TabPanels";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
@@ -11,17 +9,17 @@ import GetDistanceFromLatLonInM from "../../utils/distanceCalculator/DistanceCal
 
 const SelectedCapsInformation = () => {
   const classes = useStyles();
-  const { windowWidth } = useCapsContext();
-  const { userMarker } = useLocationContext();
+  const windowWidth = useSelector((state) => state.window.windowWidth);
+  const userMarker = useSelector((state) => state.map.userMarker);
   const [selectedTab, setSelectedTab] = useState(0);
-  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
 
   const GetDistanceBetweenSelectedCapsAndUserLocation = () => {
     var distance = GetDistanceFromLatLonInM(
       userMarker.lat,
       userMarker.lng,
-      selectedCaps.latitude,
-      selectedCaps.longitude
+      selectedMarker.latitude,
+      selectedMarker.longitude
     );
     var distanceRounded = Math.round(distance);
     return (
@@ -35,7 +33,7 @@ const SelectedCapsInformation = () => {
   };
   return (
     <>
-      {selectedCaps ? (
+      {selectedMarker ? (
         <div className={classes.capsInformationContainer}>
           <div
             className={
@@ -45,13 +43,13 @@ const SelectedCapsInformation = () => {
             }
           >
             <img
-              src={"http://localhost:5000/api/images/" + selectedCaps.imageURL}
+              src={"http://localhost:5000/api/images/" + selectedMarker.imageURL}
               alt="Foto del CAPS"
               className={classes.image}
             />
           </div>
           <div className={classes.title}>
-            <Typography variant="h5">{selectedCaps.name}</Typography>
+            <Typography variant="h5">{selectedMarker.name}</Typography>
             {userMarker ? GetDistanceBetweenSelectedCapsAndUserLocation() : undefined}
           </div>
           <hr />

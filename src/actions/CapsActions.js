@@ -1,4 +1,4 @@
-import * as actions from "./ActionTypes";
+import * as actions from "./Types";
 
 export const setSelectedCaps = (selectedCaps) => ({
   type: actions.SET_SELECTED_CAPS,

@@ -3,33 +3,34 @@ import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@materia
 import BusIcon from "@material-ui/icons/DirectionsBus";
 import { useStyles } from "./Styles";
 import { GetClosestBusStopByLine, GetClosestCapsBusStop } from "../../utils/busesLogic/BusesLogic";
-import { useBusContext } from "../../context/BusContext";
-import { useCapsContext } from "../../context/CapsContext";
-import { useLocationContext } from "../../context/LocationContext";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setCapsBusStopMarkers, setMarkers, setUserBusStopMarkers } from "../../actions/MapActions";
 
 const CapsBusStopsList = ({ radius }) => {
   const classes = useStyles();
   const [closestBuses, setClosestBuses] = useState([]);
-  const { setMarkers } = useCapsContext();
-  const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
-  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
-  const { userMarker } = useLocationContext();
+  const userMarker = useSelector((state) => state.map.userMarker);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (selectedCaps) {
-      setClosestBuses(GetClosestCapsBusStop([selectedCaps.latitude, selectedCaps.longitude], radius));
+    if (selectedMarker) {
+      setClosestBuses(GetClosestCapsBusStop([selectedMarker.latitude, selectedMarker.longitude], radius));
     }
-  }, [selectedCaps, radius]);
+  }, [selectedMarker, radius]);
 
   const handleShowBusStops = (closestBus) => {
-    if (selectedCaps) {
-      setMarkers([selectedCaps]);
-      setCapsBusStopMarkers(
-        GetClosestBusStopByLine(closestBus, [selectedCaps.latitude, selectedCaps.longitude])
+    if (selectedMarker) {
+      dispatch(setMarkers([selectedMarker]));
+      dispatch(
+        setCapsBusStopMarkers(
+          GetClosestBusStopByLine(closestBus, [selectedMarker.latitude, selectedMarker.longitude])
+        )
       );
       if (userMarker) {
-        setUserBusStopMarkers(GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng]));
+        dispatch(
+          setUserBusStopMarkers(GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng]))
+        );
       }
     }
   };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Dialog, DialogContent, IconButton } from "@material-ui/core";
-import { useCapsContext } from "../context/CapsContext";
+import { useSelector } from "react-redux";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import { useStyles } from "./Styles";
 import hospitalMarker from "../assets/img/hospitalMarker.png";
@@ -9,7 +9,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 export default function WelcomeDialog({ setTourIsOpen }) {
   const classes = useStyles();
-  const { windowWidth } = useCapsContext();
+  const windowWidth = useSelector((state) => state.window.windowWidth);
   const [open, setOpen] = useState(true);
 
   const handleOpenTour = () => {

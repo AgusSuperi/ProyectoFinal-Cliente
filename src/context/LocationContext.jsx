@@ -1,23 +1,20 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, createContext } from "react";
 import GetDistanceFromLatLonInM from "../utils/distanceCalculator/DistanceCalculator";
 import { useCapsContext } from "../context/CapsContext";
 import { useSnackbar } from "notistack";
 import { Get, GetResult } from "../utils/api/Api";
 import ErrorHandler from "../utils/errorHandler/ErrorHandler";
+import { setMarkers, setMapCenter, setSelectedMarker, setUserMarker } from "../actions/MapActions";
+import { setDrawerOpen, setFilterPanelOpen } from "../actions/DrawerActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const LocationContext = createContext();
 
 export function LocationProvider(props) {
   const { enqueueSnackbar } = useSnackbar();
-  const [userMarker, setUserMarker] = useState("");
-  const {
-    backup,
-    setDrawerOpen,
-    setFilterPanelOpen,
-    setMapCenter,
-    setMarkers,
-    setSelectedCaps,
-  } = useCapsContext();
+  const dispatch = useDispatch();
+  const userMarker = useSelector((state) => state.map.userMarker);
+  const { backup } = useCapsContext();
   const apikey = "7190089a51d94b95bce447a7c05bb7c3";
   const url_geocode = "https://api.opencagedata.com/geocode/v1/json";
 
@@ -73,17 +70,17 @@ export function LocationProvider(props) {
       lat: coords.lat,
       lng: coords.lng,
     };
-    setUserMarker(marker);
-    setMapCenter(coords);
+    dispatch(setUserMarker(marker));
+    dispatch(setMapCenter(coords));
   };
 
   const ShowClosestCapsOnMap = () => {
     if (userMarker) {
       const closestCaps = GetClosestCapsByUserLocation([userMarker.lat, userMarker.lng]);
       closestCaps.selected = true;
-      setMarkers([closestCaps]);
-      setDrawerOpen(true);
-      setFilterPanelOpen(false);
+      dispatch(setMarkers([closestCaps]));
+      dispatch(setDrawerOpen(true));
+      dispatch(setFilterPanelOpen(false));
     } else {
       enqueueSnackbar("Debe ingresar su ubicación primero", {
         variant: "warning",
@@ -106,7 +103,7 @@ export function LocationProvider(props) {
         capsDistance = distance;
       }
     });
-    setSelectedCaps(closestCaps);
+    dispatch(setSelectedMarker(closestCaps));
     return closestCaps;
   };
 

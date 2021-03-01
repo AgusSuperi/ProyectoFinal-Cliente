@@ -6,13 +6,16 @@ import FilterPanel from "../filters/FilterPanel";
 import SelectedCapsInformation from "./SelectedCapsInformation";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import { useSelector } from "react-redux";
-import ExpandMobileDrawer from "../button/ExpandMobileDrawer";
+import ExpandMobileDrawerButton from "../button/ExpandMobileDrawerButton";
 
 const DrawerPanel = () => {
   const classes = useStyles();
-  const { CloseBottomDrawer, drawerOpen, filterPanelOpen, windowWidth } = useCapsContext();
-  const [drawerIsExpanded, setDrawerIsExpanded] = useState(false);
+  const drawerOpen = useSelector((state) => state.drawer.drawerOpen);
+  const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
+  const windowWidth = useSelector((state) => state.window.windowWidth);
   const selectedCaps = useSelector((state) => state.caps.selectedCaps);
+  const { CloseBottomDrawer } = useCapsContext();
+  const [drawerIsExpanded, setDrawerIsExpanded] = useState(false);
 
   if (windowWidth > ScreenSizes.Small) {
     return (
@@ -33,7 +36,10 @@ const DrawerPanel = () => {
     return (
       <ClickAwayListener onClickAway={CloseBottomDrawer}>
         <div className={drawerIsExpanded ? classes.bottomDrawerExpanded : classes.bottomDrawerCollapsed}>
-          <ExpandMobileDrawer setDrawerIsExpanded={setDrawerIsExpanded} drawerIsExpanded={drawerIsExpanded} />
+          <ExpandMobileDrawerButton
+            setDrawerIsExpanded={setDrawerIsExpanded}
+            drawerIsExpanded={drawerIsExpanded}
+          />
           <FilterPanel />
           <SelectedCapsInformation />
         </div>

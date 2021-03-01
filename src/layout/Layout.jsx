@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./Styles";
 import DrawerPanel from "../components/drawer/DrawerPanel";
 import Map from "../components/map/Map";
-import { useCapsContext } from "../context/CapsContext";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import Tour from "reactour";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { Desktop, Mobile } from "../tour/MainTourConfig";
 import "../Styles.css";
 import WelcomeDialog from "./WelcomeDialog";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useSWR from "swr";
-import { setCaps } from "../actions/CapsActions";
+import { setMarkers } from "../actions/MapActions";
+import { setWindowWidth } from "../actions/WindowActions";
 
 export default function Layout() {
   const classes = useStyles();
-  const { data: caps } = useSWR("/medicalcenters");
-  const { windowWidth } = useCapsContext();
+  const { data: markers } = useSWR("/medicalcenters");
+  const windowWidth = useSelector((state) => state.window.windowWidth);
   const disableBody = (target) => disableBodyScroll(target);
   const enableBody = (target) => enableBodyScroll(target);
   const accentColor = "#5cb7b7";
@@ -24,8 +24,10 @@ export default function Layout() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setCaps(caps));
-  }, [dispatch, caps]);
+    dispatch(setMarkers(markers));
+    window.addEventListener("resize", dispatch(setWindowWidth(window.innerWidth)));
+    return () => window.removeEventListener("resize", dispatch(setWindowWidth(window.innerWidth)));
+  }, [dispatch, markers]);
 
   return (
     <div className={classes.root}>

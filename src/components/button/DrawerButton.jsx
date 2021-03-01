@@ -1,23 +1,28 @@
 import React from "react";
 import { Fab } from "@material-ui/core";
 import clsx from "clsx";
-import { useCapsContext } from "../../context/CapsContext";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { useStyles } from "./Styles";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import { setDrawerOpen } from "../../actions/DrawerActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const DrawerButton = () => {
   const classes = useStyles();
-  const { drawerOpen, filterPanelOpen, selectedCaps, setDrawerOpen, windowWidth } = useCapsContext();
+  const drawerOpen = useSelector((state) => state.drawer.drawerOpen);
+  const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
+  const windowWidth = useSelector((state) => state.window.windowWidth);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
+  const dispatch = useDispatch();
 
-  if ((selectedCaps || filterPanelOpen) && windowWidth > ScreenSizes.Small) {
+  if ((selectedMarker || filterPanelOpen) && windowWidth > ScreenSizes.Small) {
     return (
       <div className={classes.DrawerButton}>
         <Fab
           color="primary"
           size="small"
-          onClick={() => setDrawerOpen(!drawerOpen)}
+          onClick={() => dispatch(setDrawerOpen(!drawerOpen))}
           className={clsx({
             [classes.shiftButton]: drawerOpen,
           })}

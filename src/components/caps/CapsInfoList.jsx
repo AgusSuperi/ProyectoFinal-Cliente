@@ -8,35 +8,35 @@ import { useStyles } from "./Styles";
 
 const CapsInfoList = () => {
   const classes = useStyles();
-  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
 
   return (
     <>
-      {selectedCaps ? (
+      {selectedMarker ? (
         <div className={classes.infoContainer}>
           <List component="nav">
             <ListItem>
               <ListItemIcon>
                 <LocationIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.address} />
+              <ListItemText primary={selectedMarker.address} />
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <ClockIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.openingHours} />
+              <ListItemText primary={selectedMarker.openingHours} />
             </ListItem>
             <ListItem
               button
               component="a"
-              href={"tel:" + selectedCaps.phoneNumber}
+              href={"tel:" + selectedMarker.phoneNumber}
               className={classes.listItem}
             >
               <ListItemIcon>
                 <PhoneIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedCaps.phoneNumber} />
+              <ListItemText primary={selectedMarker.phoneNumber} />
             </ListItem>
           </List>
         </div>

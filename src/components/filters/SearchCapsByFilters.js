@@ -1,12 +1,11 @@
 import { GetCapsByData } from "../../utils/api/Api";
+import { setCapsBusStopMarkers, setUserBusStopMarkers } from "../../actions/MapActions";
 
 const SearchCapsByFilters = async (
   openingHours,
   neighborhoodsList,
   specialitiesList,
-  setMarkers,
-  setCapsBusStopMarkers,
-  setUserBusStopMarkers,
+  dispatch,
   enqueueSnackbar
 ) => {
   const data = {
@@ -14,9 +13,9 @@ const SearchCapsByFilters = async (
     Neighborhoods: neighborhoodsList,
     Specialities: specialitiesList,
   };
-  GetCapsByData(data, "/medicalcenters/filter", setMarkers, enqueueSnackbar);
-  setCapsBusStopMarkers([]);
-  setUserBusStopMarkers([]);
+  GetCapsByData(data, "/medicalcenters/filter", dispatch, enqueueSnackbar);
+  dispatch(setCapsBusStopMarkers([]));
+  dispatch(setUserBusStopMarkers([]));
   }
 
 export default SearchCapsByFilters;

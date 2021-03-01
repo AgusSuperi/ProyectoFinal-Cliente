@@ -9,7 +9,6 @@ const CapsContext = createContext();
 export function CapsProvider(props) {
   const { data: backup } = useSWR("/medicalcenters");
   const [markers, setMarkers] = useState([]);
-  const [zoom, setZoom] = useState(13);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [filterPanelOpen, setFilterPanelOpen] = useState(false);
   const [mapCenter, setMapCenter] = useState([-38.725151, -62.254951]);
@@ -59,9 +58,7 @@ export function CapsProvider(props) {
     setFilterPanelOpen,
     setMarkers,
     setMapCenter,
-    setZoom,
     windowWidth,
-    zoom,
   };
 
   return <CapsContext.Provider value={value} {...props} />;

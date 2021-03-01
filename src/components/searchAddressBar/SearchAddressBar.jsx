@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { InputBase } from "@material-ui/core";
 import { useLocationContext } from "../../context/LocationContext";
-import { useCapsContext } from "../../context/CapsContext";
 import { useStyles } from "./Styles";
 import AutoLocationButton from "../button/AutoLocationButton";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import SearchButton from "../button/SearchButton";
 import SearchIcon from "@material-ui/icons/Search";
+import { useSelector } from "react-redux";
 
 const SearchAddressBar = () => {
   const classes = useStyles();
   const [location, setLocation] = useState("");
   const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
-  const { windowWidth } = useCapsContext();
+  const windowWidth = useSelector((state) => state.window.windowWidth);
 
   const handleEnterKeyPress = (event) => {
     if (event.which === 13 || event.keyCode === 13) {

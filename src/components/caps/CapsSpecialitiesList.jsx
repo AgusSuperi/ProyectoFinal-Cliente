@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import useSWR from "swr";
 
 const CapsSpecialitiesList = () => {
-  const selectedCaps = useSelector((state) => state.caps.selectedCaps);
-  const { data: specialities } = useSWR(`/medicalcenters/${selectedCaps.id}/specialities`);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
+  const { data: specialities } = useSWR(`/medicalcenters/${selectedMarker.id}/specialities`);
 
   if (!specialities) {
     return (

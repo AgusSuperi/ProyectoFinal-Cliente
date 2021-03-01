@@ -4,7 +4,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandLess";
 import ExpandLessIcon from "@material-ui/icons/ExpandMore";
 import { useStyles } from "./Styles";
 
-const ExpandMobileDrawer = ({ drawerIsExpanded, setDrawerIsExpanded }) => {
+const ExpandMobileDrawerButton = ({ drawerIsExpanded, setDrawerIsExpanded }) => {
   const classes = useStyles();
 
   return (
@@ -21,4 +21,4 @@ const ExpandMobileDrawer = ({ drawerIsExpanded, setDrawerIsExpanded }) => {
   );
 };
 
-export default ExpandMobileDrawer;
+export default ExpandMobileDrawerButton;

@@ -7,23 +7,20 @@ import NearMeIcon from "@material-ui/icons/NearMe";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { useBusContext } from "../../context/BusContext";
 import { useCapsContext } from "../../context/CapsContext";
 import { useLocationContext } from "../../context/LocationContext";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
+import { useDispatch, useSelector } from "react-redux";
+import { setDrawerOpen, setFilterPanelOpen } from "../../actions/DrawerActions";
+import { setCapsBusStopMarkers, setSelectedMarker, setUserBusStopMarkers } from "../../actions/MapActions";
 
 export default function MenuButton() {
   const classes = useStyles();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const { setCapsBusStopMarkers, setUserBusStopMarkers } = useBusContext();
-  const {
-    resetMarkers,
-    setDrawerOpen,
-    setFilterPanelOpen,
-    selectedCaps,
-    setSelectedCaps,
-    windowWidth,
-  } = useCapsContext();
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
+  const windowWidth = useSelector((state) => state.window.windowWidth);
+  const { resetMarkers } = useCapsContext();
+  const dispatch = useDispatch();
   const { ShowClosestCapsOnMap } = useLocationContext();
 
   const handleOpenCloseMenu = () => {
@@ -38,17 +35,17 @@ export default function MenuButton() {
   const handleShowClosestCaps = () => {
     ShowClosestCapsOnMap();
     setMenuIsOpen(false);
-    setCapsBusStopMarkers([]);
-    setUserBusStopMarkers([]);
+    dispatch(setCapsBusStopMarkers([]));
+    dispatch(setUserBusStopMarkers([]));
   };
 
   const handleShowFilter = () => {
-    if (selectedCaps) {
-      selectedCaps.selected = false;
+    if (selectedMarker) {
+      selectedMarker.selected = false;
     }
-    setFilterPanelOpen(true);
-    setSelectedCaps("");
-    setDrawerOpen(true);
+    dispatch(setFilterPanelOpen(true));
+    dispatch(setSelectedMarker(""));
+    dispatch(setDrawerOpen(true));
     setMenuIsOpen(false);
   };
 
