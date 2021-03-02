@@ -7,39 +7,64 @@ import NearMeIcon from "@material-ui/icons/NearMe";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { useCapsContext } from "../../context/CapsContext";
-import { useLocationContext } from "../../context/LocationContext";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import { useDispatch, useSelector } from "react-redux";
 import { setDrawerOpen, setFilterPanelOpen } from "../../actions/DrawerActions";
-import { setCapsBusStopMarkers, setSelectedMarker, setUserBusStopMarkers } from "../../actions/MapActions";
+import {
+  setCapsBusStopMarkers,
+  setMarkers,
+  setSelectedMarker,
+  setUserBusStopMarkers,
+} from "../../actions/MapActions";
+import { GetData, GetWithBody } from "../../utils/api/Api";
+import { resetMarkers } from "../../actions/MapActions";
+import { useSnackbar } from "notistack";
 
 export default function MenuButton() {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
   const windowWidth = useSelector((state) => state.window.windowWidth);
-  const { resetMarkers } = useCapsContext();
+  const userMarker = useSelector((state) => state.map.userMarker);
   const dispatch = useDispatch();
-  const { ShowClosestCapsOnMap } = useLocationContext();
 
-  const handleOpenCloseMenu = () => {
+  const HandleResetMarkers = async () => {
+    var markers = await GetData("/medicalcenters");
+    dispatch(resetMarkers(markers));
+  };
+
+  const HandleOpenCloseMenu = () => {
     setMenuIsOpen(!menuIsOpen);
   };
 
-  const handleShowAllCaps = () => {
-    resetMarkers();
+  const HandleShowAllCaps = () => {
+    HandleResetMarkers();
     setMenuIsOpen(false);
   };
 
-  const handleShowClosestCaps = () => {
-    ShowClosestCapsOnMap();
+  const HandleShowClosestCaps = async () => {
+    if (userMarker) {
+      const data = {
+        latitude: userMarker.lat,
+        longitude: userMarker.lng,
+      };
+      var closestCaps = await GetWithBody(data, "/medicalcenters/closest", enqueueSnackbar);
+      dispatch(setSelectedMarker(closestCaps));
+      dispatch(setMarkers([closestCaps]));
+      dispatch(setDrawerOpen(true));
+      dispatch(setFilterPanelOpen(false));
+      dispatch(setCapsBusStopMarkers([]));
+      dispatch(setUserBusStopMarkers([]));
+    } else {
+      enqueueSnackbar("Debe ingresar su ubicación primero", {
+        variant: "warning",
+      });
+    }
     setMenuIsOpen(false);
-    dispatch(setCapsBusStopMarkers([]));
-    dispatch(setUserBusStopMarkers([]));
   };
 
-  const handleShowFilter = () => {
+  const HandleShowFilter = () => {
     if (selectedMarker) {
       selectedMarker.selected = false;
     }
@@ -57,7 +82,7 @@ export default function MenuButton() {
             size="medium"
             variant="extended"
             color="primary"
-            onClick={handleOpenCloseMenu}
+            onClick={HandleOpenCloseMenu}
             data-tut="reactour__menuButton"
           >
             Mostrar CAPS
@@ -68,7 +93,7 @@ export default function MenuButton() {
             )}
           </Fab>
         ) : (
-          <Fab color="primary" size="small" onClick={handleOpenCloseMenu} data-tut="reactour__menuButton">
+          <Fab color="primary" size="small" onClick={HandleOpenCloseMenu} data-tut="reactour__menuButton">
             <MoreVertIcon />
           </Fab>
         )}
@@ -76,19 +101,19 @@ export default function MenuButton() {
         <div className={classes.MenuItemContainer} data-tut="reactour__menuButton--observe">
           {menuIsOpen && (
             <div className={classes.menuButtonContainer}>
-              <StyledMenuItem onClick={handleShowClosestCaps}>
+              <StyledMenuItem onClick={HandleShowClosestCaps}>
                 <ListItemIcon className={classes.icon}>
                   <NearMeIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="Más cercano" className={classes.listItemText} />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleShowAllCaps}>
+              <StyledMenuItem onClick={HandleShowAllCaps}>
                 <ListItemIcon className={classes.icon}>
                   <LocationOnIcon fontSize="small" />
                 </ListItemIcon>
                 <ListItemText primary="Todos" className={classes.listItemText} />
               </StyledMenuItem>
-              <StyledMenuItem onClick={handleShowFilter}>
+              <StyledMenuItem onClick={HandleShowFilter}>
                 <ListItemIcon className={classes.icon}>
                   <FilterListIcon fontSize="small" />
                 </ListItemIcon>

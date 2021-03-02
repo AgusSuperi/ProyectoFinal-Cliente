@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useStyles } from "./Styles";
 import { Button, Divider, Fab } from "@material-ui/core";
-import { useCapsContext } from "../../context/CapsContext";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import CheckBoxList from "./CheckBoxList";
-import SearchCapsByFilters from "./SearchCapsByFilters";
+import SearchCapsByFilters from "../../functions/SearchCapsByFilters";
 import RadioButtonList from "./RadioButtonList";
 import { useDispatch, useSelector } from "react-redux";
+import { resetMarkers } from "../../actions/MapActions";
+import { GetData } from "../../utils/api/Api";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -16,13 +17,17 @@ const FilterPanel = () => {
   const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
   const windowWidth = useSelector((state) => state.window.windowWidth);
   const dispatch = useDispatch();
-  const { resetMarkers } = useCapsContext();
   const { data: specialities } = useSWR("/specialities/names");
   const { data: neighborhoods } = useSWR("/medicalcenters/neighborhoods");
   const { data: filterOpeningHours } = useSWR("/medicalcenters/filterOpeningHours");
   const [selectedSpecialities, setSelectedSpecialities] = useState([]);
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState([]);
   const [selectedFilterOpeningHours, setSelectedFilterOpeningHours] = useState("08:00 a 14:00");
+
+  const HandleResetMarkers = async () => {
+    const markers = await GetData("/medicalcenters");
+    dispatch(resetMarkers(markers));
+  };
 
   const HandleUpdateList = (selectedItems, setSelectedItems, item) => {
     if (selectedItems.includes(item)) {
@@ -36,7 +41,7 @@ const FilterPanel = () => {
     setSelectedFilterOpeningHours("08:00 a 14:00");
     setSelectedNeighborhoods([]);
     setSelectedSpecialities([]);
-    resetMarkers();
+    HandleResetMarkers();
   };
 
   return (

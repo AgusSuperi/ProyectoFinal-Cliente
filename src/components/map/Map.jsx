@@ -22,6 +22,7 @@ export default function CityMap() {
   const mapCenter = useSelector((state) => state.map.mapCenter);
   const capsBusStopMarkers = useSelector((state) => state.map.capsBusStopMarkers);
   const userBusStopMarkers = useSelector((state) => state.map.userBusStopMarkers);
+  const selectedMarker = useSelector((state) => state.map.selectedMarker);
   const userMarker = useSelector((state) => state.map.userMarker);
   const [actualMarkerSelected, setActualMarkerSelected] = useState([]);
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ export default function CityMap() {
           <Marker
             key={capsMarker.id}
             position={[capsMarker.latitude, capsMarker.longitude]}
-            icon={capsMarker.selected ? capsIconBigger : capsIcon}
+            icon={selectedMarker && capsMarker.selected ? capsIconBigger : capsIcon}
             onClick={() => handleSelectMarker(capsMarker)}
           />
         ))}

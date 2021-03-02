@@ -5,7 +5,7 @@ import DrawerBottomNavigation from "./DrawerBottomNavigation";
 import TabPanels from "../tabPanel/TabPanels";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import { useSelector } from "react-redux";
-import GetDistanceFromLatLonInM from "../../utils/distanceCalculator/DistanceCalculator";
+import GetDistanceFromLatLonInM from "../../functions/GetDistanceFromLatLonInM";
 
 const SelectedCapsInformation = () => {
   const classes = useStyles();

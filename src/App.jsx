@@ -1,9 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Layout from "./layout/Layout";
-import { BusProvider } from "./context/BusContext";
-import { CapsProvider } from "./context/CapsContext";
-import { LocationProvider } from "./context/LocationContext";
 import { SWRConfig } from "swr";
 import { fetcher } from "./utils/api/Api";
 import { SnackbarProvider } from "notistack";
@@ -13,10 +10,10 @@ import "./Styles.css";
 export default function App() {
   return (
     <SnackbarProvider
-      maxSnack={1}
+      maxSnack={3}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: "bottom",
+        horizontal: "left",
       }}
     >
       <SWRConfig
@@ -27,16 +24,10 @@ export default function App() {
           fetcher,
         }}
       >
-        <BusProvider>
-          <CapsProvider>
-            <LocationProvider>
-              <Switch>
-                <Route exact path="/" component={Layout} />
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </LocationProvider>
-          </CapsProvider>
-        </BusProvider>
+        <Switch>
+          <Route exact path="/" component={Layout} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </SWRConfig>
     </SnackbarProvider>
   );

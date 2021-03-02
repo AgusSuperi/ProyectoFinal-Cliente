@@ -17,6 +17,12 @@ export const DrawerReducer = (state = initialState, action) => {
         ...state,
         filterPanelOpen: action.payload,
       };
+      case actions.CLOSE_DRAWER:
+      return {
+        ...state,
+        filterPanelOpen: false,
+        drawerOpen: false
+      };
     default:
       return state;
   }

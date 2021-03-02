@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useStyles } from "./Styles";
 import DrawerPanel from "../components/drawer/DrawerPanel";
 import Map from "../components/map/Map";
@@ -23,11 +23,17 @@ export default function Layout() {
   const [isTourOpen, setTourIsOpen] = useState(false);
   const dispatch = useDispatch();
 
+  const handleResize = useCallback(() => {
+    dispatch(setWindowWidth(window.innerWidth));
+  }, [dispatch]);
+
   useEffect(() => {
     dispatch(setMarkers(markers));
-    window.addEventListener("resize", dispatch(setWindowWidth(window.innerWidth)));
-    return () => window.removeEventListener("resize", dispatch(setWindowWidth(window.innerWidth)));
   }, [dispatch, markers]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+  }, [handleResize]);
 
   return (
     <div className={classes.root}>

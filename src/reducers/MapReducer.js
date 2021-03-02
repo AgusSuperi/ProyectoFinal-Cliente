@@ -41,6 +41,13 @@ export const MapReducer = (state = initialState, action) => {
         ...state,
         mapCenter: action.payload,
       };
+      case actions.RESET_MARKERS:
+      return {
+        ...state,
+        capsBusStopMarkers: [],
+        userBusStopMarkers: [],
+        markers: action.payload,
+      };
     default:
       return state;
   }

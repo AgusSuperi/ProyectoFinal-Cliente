@@ -29,3 +29,8 @@ export const setMapCenter = (mapCenter) => ({
     type: actions.SET_MAP_CENTER,
     payload: mapCenter,
 });
+
+export const resetMarkers = (markers) => ({
+    type: actions.RESET_MARKERS,
+    payload: markers,
+});

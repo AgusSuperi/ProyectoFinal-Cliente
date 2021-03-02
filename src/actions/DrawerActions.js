@@ -8,4 +8,8 @@ export const setDrawerOpen = (drawerOpen) => ({
 export const setFilterPanelOpen = (filterPanelOpen) => ({
     type: actions.SET_FILTER_PANEL_OPEN,
     payload: filterPanelOpen,
-  });
+});
+
+export const closeDrawer = () => ({
+  type: actions.CLOSE_DRAWER,
+});

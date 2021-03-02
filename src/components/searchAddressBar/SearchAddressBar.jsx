@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import { InputBase } from "@material-ui/core";
-import { useLocationContext } from "../../context/LocationContext";
+import { useSnackbar } from "notistack";
 import { useStyles } from "./Styles";
 import AutoLocationButton from "../button/AutoLocationButton";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import SearchButton from "../button/SearchButton";
 import SearchIcon from "@material-ui/icons/Search";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ShowUserMarkerByAddress from "../../functions/ShowUserMarkerByAddress";
 
 const SearchAddressBar = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [location, setLocation] = useState("");
-  const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
+  const { enqueueSnackbar } = useSnackbar();
   const windowWidth = useSelector((state) => state.window.windowWidth);
 
   const handleEnterKeyPress = (event) => {
     if (event.which === 13 || event.keyCode === 13) {
-      GetUserLocationByAddressAndShowMarker(location);
+      ShowUserMarkerByAddress(location, dispatch, enqueueSnackbar);
     }
   };
 

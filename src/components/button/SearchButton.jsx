@@ -2,12 +2,15 @@ import React from "react";
 import { Fab, Zoom } from "@material-ui/core";
 import { ButtonTooltip } from "./Styles";
 import SearchIcon from "@material-ui/icons/Search";
-import { useLocationContext } from "../../context/LocationContext";
 import { useStyles } from "./Styles";
+import { useDispatch } from "react-redux";
+import ShowUserMarkerByAddress from "../../functions/ShowUserMarkerByAddress";
+import { useSnackbar } from "notistack";
 
 const SearchButton = ({ location }) => {
   const classes = useStyles();
-  const { GetUserLocationByAddressAndShowMarker } = useLocationContext();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   return (
     <div className={classes.browserLocationButton}>
@@ -18,7 +21,11 @@ const SearchButton = ({ location }) => {
         interactive
         placement="bottom"
       >
-        <Fab color="primary" size="small" onClick={() => GetUserLocationByAddressAndShowMarker(location)}>
+        <Fab
+          color="primary"
+          size="small"
+          onClick={() => ShowUserMarkerByAddress(location, dispatch, enqueueSnackbar)}
+        >
           <SearchIcon />
         </Fab>
       </ButtonTooltip>
