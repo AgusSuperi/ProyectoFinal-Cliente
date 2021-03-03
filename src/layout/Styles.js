@@ -12,10 +12,10 @@ export const useStyles = makeStyles((theme) => ({
   mapContentDrawerBottom: {
     flexGrow: 1,
   },
-  dialogContent:{
-    textAlign: "center"
+  dialogContent: {
+    textAlign: "center",
   },
-  dialogTitle:{
+  dialogTitle: {
     fontFamily: "'roboto'",
     marginLeft: "15px",
     marginTop: "10px",
@@ -23,34 +23,29 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: "25px",
     textAlign: "center",
   },
-  dialogText:{
-    fontFamily: 'roboto',
+  dialogText: {
+    fontFamily: "roboto",
     textAlign: "center",
     verticalAlign: "middle",
-    fontSize: "19px",
+    fontSize: "17px",
   },
-  marker:{
+  marker: {
     width: "30px",
-    verticalAlign: "middle"
+    verticalAlign: "middle",
   },
-  buttonContainer:{
+  buttonContainer: {
     textAlign: "center",
-    margin: "20px"
+    margin: "10px",
   },
-  button:{
-    margin: "15px"
+  dialogButton: {
+    marginLeft: "10px",
+    marginRight: "10px",
   },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-  welcomeImageContainer:{
+  welcomeImageContainer: {
     textAlign: "center",
-    margin: "15px"
+    margin: "10px",
   },
-  welcomeImage:{
-    width: "100px",
-  }
+  welcomeImage: {
+    width: "60px",
+  },
 }));

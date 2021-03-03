@@ -12,8 +12,8 @@ export default function App() {
     <SnackbarProvider
       maxSnack={3}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
+        vertical: "top",
+        horizontal: "right",
       }}
     >
       <SWRConfig

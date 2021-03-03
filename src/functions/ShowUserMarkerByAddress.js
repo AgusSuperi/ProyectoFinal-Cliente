@@ -18,6 +18,10 @@ const ShowUserMarkerByAddress = (location, dispatch, enqueueSnackbar) => {
           variant: "error",
         });
       });
+  } else {
+    enqueueSnackbar("Debe ingresar su ubicación primero", {
+      variant: "warning",
+    });
   }
 };
 

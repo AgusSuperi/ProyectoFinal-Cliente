@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Button, Dialog, DialogContent, IconButton } from "@material-ui/core";
+import { Button, Dialog, DialogContent } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import { useStyles } from "./Styles";
 import hospitalMarker from "../assets/img/hospitalMarker.png";
 import welcome from "../assets/img/welcome.png";
-import CloseIcon from "@material-ui/icons/Close";
 
 export default function WelcomeDialog({ setTourIsOpen }) {
   const classes = useStyles();
@@ -23,9 +22,6 @@ export default function WelcomeDialog({ setTourIsOpen }) {
         <div className={classes.welcomeImageContainer}>
           <img src={welcome} alt="Imagen de bienvenida" className={classes.welcomeImage} />
         </div>
-        <IconButton className={classes.closeButton} onClick={() => setOpen(false)}>
-          <CloseIcon />
-        </IconButton>
         <DialogContent className={classes.dialogContent}>
           <span className={classes.dialogText}>
             Aquí encontrará información relacionada a los Centros de Atención Primaria de la Salud (CAPS) del
@@ -45,7 +41,7 @@ export default function WelcomeDialog({ setTourIsOpen }) {
             size={windowWidth > ScreenSizes.Small ? "large" : "medium"}
             color="primary"
             variant="contained"
-            className={classes.button}
+            className={classes.dialogButton}
           >
             Si quiero
           </Button>
@@ -54,6 +50,7 @@ export default function WelcomeDialog({ setTourIsOpen }) {
             size={windowWidth > ScreenSizes.Small ? "large" : "medium"}
             color="default"
             variant="outlined"
+            className={classes.dialogButton}
           >
             No, gracias
           </Button>

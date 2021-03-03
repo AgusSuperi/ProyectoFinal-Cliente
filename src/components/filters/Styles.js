@@ -7,17 +7,6 @@ export const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(2),
   },
-  formControlMobile: {
-    width: "100%",
-    marginBottom: theme.spacing(2),
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap",
-  },
-  chip: {
-    margin: 2,
-  },
   noLabel: {
     marginTop: theme.spacing(3),
   },
@@ -38,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-  },  
+  },
   showMoreOrLessText: {
     cursor: "pointer",
     color: "#1B69B7",
