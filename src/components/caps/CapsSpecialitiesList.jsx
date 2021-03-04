@@ -2,7 +2,7 @@ import React from "react";
 import { useStyles } from "./Styles";
 import { List, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import Skeleton from "@material-ui/lab/Skeleton";
-import ArrowIcon from "@material-ui/icons/ArrowRight";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { useSelector } from "react-redux";
 import useSWR from "swr";
 
@@ -13,7 +13,7 @@ const CapsSpecialitiesList = () => {
 
   if (!specialities) {
     return (
-      <List className={classes.list}>
+      <List dense className={classes.list}>
         {[...Array(5)].map((e, i) => (
           <ListItem key={i}>
             <ListItemIcon>
@@ -26,11 +26,11 @@ const CapsSpecialitiesList = () => {
     );
   } else {
     return (
-      <List className={classes.list}>
+      <List dense className={classes.list}>
         {(specialities || []).map((speciality) => (
           <ListItem key={speciality.id}>
             <ListItemIcon>
-              <ArrowIcon />
+              <ArrowForwardIosIcon className={classes.arrowIcon} />
             </ListItemIcon>
             <ListItemText primary={speciality.name} />
           </ListItem>

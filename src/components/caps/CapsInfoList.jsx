@@ -25,7 +25,7 @@ const CapsInfoList = () => {
               <ListItemIcon>
                 <ClockIcon color="primary" />
               </ListItemIcon>
-              <ListItemText primary={selectedMarker.openingHours} />
+              <ListItemText primary={selectedMarker.openingHours + " (Lunes a Viernes)"} />
             </ListItem>
             <ListItem
               button

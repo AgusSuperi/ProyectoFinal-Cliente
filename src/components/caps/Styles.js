@@ -3,10 +3,14 @@ import { makeStyles } from "@material-ui/core";
 export const useStyles = makeStyles(() => ({
   infoContainer: {
     width: "100%",
-    marginTop: "10px",
-  },
-  description: {
     marginTop: "25px",
+  },
+  firstStep: {
+    color: "gray",
+  },
+  secondStep: {
+    marginTop: "30px",
+    color: "gray",
   },
   listItem: {
     "&:hover": {
@@ -17,6 +21,21 @@ export const useStyles = makeStyles(() => ({
     marginTop: "20px",
   },
   root: {
-    marginTop: "10px",
+    marginTop: "30px",
+  },
+  title: {
+    marginBottom: "25px",
+  },
+  wrapIcon: {
+    verticalAlign: "middle",
+    display: "inline-flex",
+    marginTop: "30px",
+    color: "gray",
+  },
+  linkIcon: {
+    width: "20px",
+  },
+  arrowIcon: {
+    width: "15px",
   },
 }));

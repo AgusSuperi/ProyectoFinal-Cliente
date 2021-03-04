@@ -6,6 +6,7 @@ import { GetClosestBusStopByLine, GetClosestCapsBusStop } from "../../utils/buse
 import { useDispatch, useSelector } from "react-redux";
 import { setCapsBusStopMarkers, setMarkers, setUserBusStopMarkers } from "../../actions/MapActions";
 import SliderMarks from "./SliderMarks";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
 const CapsBusStopsList = () => {
   const classes = useStyles();
@@ -46,7 +47,12 @@ const CapsBusStopsList = () => {
   };
   return (
     <div className={classes.root}>
-      <Typography gutterBottom>Seleccione un radio de cuadras</Typography>
+      <Typography variant="subtitle2" className={classes.firstStep}>
+        Paso 1
+      </Typography>
+      <Typography variant="subtitle1" className={classes.title}>
+        Seleccione un radio de cuadras para mostrar las líneas de colectivo más cercanas al CAPS
+      </Typography>
       <Slider
         defaultValue={0}
         valueLabelFormat={valueLabelFormat}
@@ -58,8 +64,11 @@ const CapsBusStopsList = () => {
 
       {closestBuses.length > 0 ? (
         <>
-          <Typography variant="subtitle1" className={classes.description}>
-            Seleccione una línea para ver sus paradas cercanas
+          <Typography variant="subtitle2" className={classes.secondStep}>
+            Paso 2
+          </Typography>
+          <Typography variant="subtitle1">
+            Seleccione una línea para conocer sus paradas, tanto de ida como de vuelta
           </Typography>
           <List className={classes.infoContainer}>
             {(closestBuses || []).map((closestBus, value) => (
@@ -78,8 +87,9 @@ const CapsBusStopsList = () => {
           </List>
         </>
       ) : (
-        <Typography variant="subtitle1" className={classes.description}>
-          <b>No se encontraron colectivos en el radio seleccionado</b>
+        <Typography variant="subtitle1" className={classes.wrapIcon}>
+          <ErrorOutlineIcon className={classes.linkIcon} /> No se encontraron paradas de colectivo en el radio
+          de cuadras seleccionado
         </Typography>
       )}
     </div>
