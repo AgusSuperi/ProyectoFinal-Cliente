@@ -2,7 +2,7 @@ import React from "react";
 import TabPanel from "./TabPanel";
 import CapsInfoList from "../caps/CapsInfoList";
 import CapsSpecialitiesList from "../caps/CapsSpecialitiesList";
-import BusStopsSlider from "../slider/BusSlider";
+import CapsBusStopsList from "../caps/CapsBusStopsList";
 
 const TabPanels = ({ value }) => {
   return (
@@ -14,7 +14,7 @@ const TabPanels = ({ value }) => {
         <CapsSpecialitiesList />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <BusStopsSlider />
+        <CapsBusStopsList />
       </TabPanel>
     </div>
   );
