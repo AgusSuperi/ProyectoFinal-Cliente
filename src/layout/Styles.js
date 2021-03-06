@@ -41,11 +41,9 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: "10px",
     marginRight: "10px",
   },
-  welcomeImageContainer: {
+  title:{
     textAlign: "center",
-    margin: "10px",
-  },
-  welcomeImage: {
-    width: "60px",
-  },
+    marginTop: "10px",
+    fontSize: "23px"
+  }
 }));

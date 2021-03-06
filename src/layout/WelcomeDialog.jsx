@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Button, Dialog, DialogContent } from "@material-ui/core";
+import { Button, Dialog, DialogContent, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
 import { useStyles } from "./Styles";
 import hospitalMarker from "../assets/img/hospitalMarker.png";
-import welcome from "../assets/img/welcome.png";
 
 export default function WelcomeDialog({ setTourIsOpen }) {
   const classes = useStyles();
@@ -19,9 +18,9 @@ export default function WelcomeDialog({ setTourIsOpen }) {
   return (
     <div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <div className={classes.welcomeImageContainer}>
-          <img src={welcome} alt="Imagen de bienvenida" className={classes.welcomeImage} />
-        </div>
+        <Typography variant="h6" className={classes.title}>
+          ¡Bienvenido!
+        </Typography>
         <DialogContent className={classes.dialogContent}>
           <span className={classes.dialogText}>
             Aquí encontrará información relacionada a los Centros de Atención Primaria de la Salud (CAPS) del
