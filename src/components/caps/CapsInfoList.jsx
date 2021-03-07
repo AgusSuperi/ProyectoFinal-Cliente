@@ -46,14 +46,13 @@ const CapsInfoList = () => {
               windowWidth > ScreenSizes.Small ? classes.emergencyRootDesktop : classes.emergencyRootMobile
             }
           >
-            {windowWidth > ScreenSizes.Small ? <hr /> : null}
             <Typography variant="subtitle2" className={classes.emergencyLabel}>
               Emergencias médicas
             </Typography>
             <Grid container justify="center" className={classes.emergencyContainer}>
               <Grid item>
                 <a href="tel:107">
-                  <Fab color="primary" size={windowWidth > ScreenSizes.Small ? undefined : "small"}>
+                  <Fab color="primary" size={windowWidth > ScreenSizes.Small ? "medium" : "small"}>
                     <PhoneIcon />
                   </Fab>
                 </a>
