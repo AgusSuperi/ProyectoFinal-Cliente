@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStyles } from "./Styles";
 import { Typography } from "@material-ui/core";
 import DrawerBottomNavigation from "./DrawerBottomNavigation";
@@ -13,6 +13,12 @@ const SelectedCapsInformation = () => {
   const userMarker = useSelector((state) => state.map.userMarker);
   const [selectedTab, setSelectedTab] = useState(0);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
+
+  useEffect(() => {
+    if (selectedMarker) {
+      setSelectedTab(0);
+    }
+  }, [selectedMarker]);
 
   const GetDistanceBetweenSelectedCapsAndUserLocation = () => {
     var distance = GetDistanceFromLatLonInM(

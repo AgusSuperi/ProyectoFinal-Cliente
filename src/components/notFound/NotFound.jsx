@@ -10,7 +10,14 @@ const NotFound = () => {
   return (
     <Container className={classes.imageContainer}>
       <img src={NotFoundImage} alt="Not found" className={classes.image} />
-      <Fab variant="extended" color="primary" component={Link} to="/" className={classes.button}>
+      <Fab
+        variant="extended"
+        size="medium"
+        color="primary"
+        component={Link}
+        to="/"
+        className={classes.button}
+      >
         Volver al inicio
       </Fab>
     </Container>

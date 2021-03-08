@@ -9,15 +9,15 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
 import { useDispatch, useSelector } from "react-redux";
-import { setDrawerOpen, setFilterPanelOpen } from "../../actions/DrawerActions";
+import { closeDrawer, setDrawerOpen, setFilterPanelOpen } from "../../actions/DrawerActions";
 import {
   setCapsBusStopMarkers,
   setMarkers,
   setSelectedMarker,
   setUserBusStopMarkers,
+  resetMarkers,
 } from "../../actions/MapActions";
 import { GetData, GetWithBody } from "../../utils/api/Api";
-import { resetMarkers } from "../../actions/MapActions";
 import { useSnackbar } from "notistack";
 
 export default function MenuButton() {
@@ -41,6 +41,8 @@ export default function MenuButton() {
   const HandleShowAllCaps = () => {
     HandleResetMarkers();
     setMenuIsOpen(false);
+    dispatch(closeDrawer());
+    dispatch(setSelectedMarker(""));
   };
 
   const HandleShowClosestCaps = async () => {
@@ -58,7 +60,7 @@ export default function MenuButton() {
       dispatch(setUserBusStopMarkers([]));
     } else {
       enqueueSnackbar("Debe ingresar su ubicación primero", {
-        variant: "warning",
+        variant: "info",
       });
     }
     setMenuIsOpen(false);

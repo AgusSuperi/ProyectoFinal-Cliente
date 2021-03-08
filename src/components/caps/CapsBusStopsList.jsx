@@ -11,6 +11,7 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 const CapsBusStopsList = () => {
   const classes = useStyles();
   const [closestBuses, setClosestBuses] = useState([]);
+  const [selectedBus, setSelectedBus] = useState({});
   const [radius, setRadius] = useState(1);
   const userMarker = useSelector((state) => state.map.userMarker);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
@@ -30,19 +31,21 @@ const CapsBusStopsList = () => {
     }
   }, [selectedMarker, radius]);
 
+  useEffect(() => {
+    if (userMarker && selectedBus) {
+      dispatch(setUserBusStopMarkers(GetClosestBusStopByLine(selectedBus, [userMarker.lat, userMarker.lng])));
+    }
+  }, [dispatch, userMarker, selectedBus]);
+
   const handleShowBusStops = (closestBus) => {
     if (selectedMarker) {
+      setSelectedBus(closestBus);
       dispatch(setMarkers([selectedMarker]));
       dispatch(
         setCapsBusStopMarkers(
           GetClosestBusStopByLine(closestBus, [selectedMarker.latitude, selectedMarker.longitude])
         )
       );
-      if (userMarker) {
-        dispatch(
-          setUserBusStopMarkers(GetClosestBusStopByLine(closestBus, [userMarker.lat, userMarker.lng]))
-        );
-      }
     }
   };
   return (

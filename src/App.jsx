@@ -10,11 +10,12 @@ import "./Styles.css";
 export default function App() {
   return (
     <SnackbarProvider
-      maxSnack={3}
+      maxSnack={2}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
       }}
+      preventDuplicate
     >
       <SWRConfig
         value={{

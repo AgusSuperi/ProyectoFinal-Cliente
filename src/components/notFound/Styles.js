@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(() => ({
   imageContainer: {
-    width: "500px",
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
     minHeight: "100vh",
   },
   image: {
-    width: "100%",
+    width: "300px",
   },
   button: {
     marginTop: 30,
