@@ -9,11 +9,11 @@ import SearchCapsByFilters from "../../functions/SearchCapsByFilters";
 import RadioButtonList from "./RadioButtonList";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMarkers } from "../../actions/MapActions";
-import { GetData } from "../../utils/api/Api";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
+  const { data: markers } = useSWR("/medicalcenters");
   const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
   const windowWidth = useSelector((state) => state.window.windowWidth);
   const dispatch = useDispatch();
@@ -25,7 +25,6 @@ const FilterPanel = () => {
   const [selectedFilterOpeningHours, setSelectedFilterOpeningHours] = useState("08:00 a 14:00");
 
   const HandleResetMarkers = async () => {
-    const markers = await GetData("/medicalcenters");
     dispatch(resetMarkers(markers));
   };
 

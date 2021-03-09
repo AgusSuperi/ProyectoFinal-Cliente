@@ -17,11 +17,13 @@ import {
   setUserBusStopMarkers,
   resetMarkers,
 } from "../../actions/MapActions";
-import { GetData, GetWithBody } from "../../utils/api/Api";
+import useSWR from "swr";
+import { GetWithBody } from "../../utils/api/Api";
 import { useSnackbar } from "notistack";
 
 export default function MenuButton() {
   const classes = useStyles();
+  const { data: markers } = useSWR("/medicalcenters");
   const { enqueueSnackbar } = useSnackbar();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
@@ -30,7 +32,6 @@ export default function MenuButton() {
   const dispatch = useDispatch();
 
   const HandleResetMarkers = async () => {
-    var markers = await GetData("/medicalcenters");
     dispatch(resetMarkers(markers));
   };
 
@@ -52,6 +53,7 @@ export default function MenuButton() {
         longitude: userMarker.lng,
       };
       var closestCaps = await GetWithBody(data, "/medicalcenters/closest", enqueueSnackbar);
+      closestCaps.selected = true;
       dispatch(setSelectedMarker(closestCaps));
       dispatch(setMarkers([closestCaps]));
       dispatch(setDrawerOpen(true));
@@ -70,6 +72,7 @@ export default function MenuButton() {
     if (selectedMarker) {
       selectedMarker.selected = false;
     }
+    HandleResetMarkers();
     dispatch(setFilterPanelOpen(true));
     dispatch(setSelectedMarker(""));
     dispatch(setDrawerOpen(true));

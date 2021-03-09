@@ -49,11 +49,11 @@ const CapsBusStopsList = () => {
     }
   };
   return (
-    <div className={classes.root}>
+    <div>
       <Typography variant="subtitle2" className={classes.firstStep}>
         Paso 1
       </Typography>
-      <Typography variant="subtitle1" className={classes.title}>
+      <Typography variant="subtitle2" className={classes.title}>
         Seleccione un radio de cuadras para mostrar las líneas de colectivo más cercanas al CAPS
       </Typography>
       <Slider
@@ -70,7 +70,7 @@ const CapsBusStopsList = () => {
           <Typography variant="subtitle2" className={classes.secondStep}>
             Paso 2
           </Typography>
-          <Typography variant="subtitle1">
+          <Typography variant="subtitle2">
             Seleccione una línea para conocer sus paradas, tanto de ida como de vuelta
           </Typography>
           <List className={classes.infoContainer}>
@@ -90,7 +90,7 @@ const CapsBusStopsList = () => {
           </List>
         </>
       ) : (
-        <Typography variant="subtitle1" className={classes.wrapIcon}>
+        <Typography variant="subtitle2" className={classes.wrapIcon}>
           <ErrorOutlineIcon className={classes.linkIcon} /> No se encontraron paradas de colectivo en el radio
           de cuadras seleccionado
         </Typography>

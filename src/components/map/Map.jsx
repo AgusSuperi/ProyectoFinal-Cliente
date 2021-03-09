@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import {
   capsBusStopIcon,
@@ -24,20 +24,17 @@ export default function CityMap() {
   const userBusStopMarkers = useSelector((state) => state.map.userBusStopMarkers);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
   const userMarker = useSelector((state) => state.map.userMarker);
-  const [actualMarkerSelected, setActualMarkerSelected] = useState([]);
   const dispatch = useDispatch();
 
   const handleSelectMarker = (capsMarker) => {
-    changeActualMarkerSelected(capsMarker);
+    var actual = markers.find((x) => x.selected);
+    if (actual) {
+      actual.selected = false;
+    }
+    capsMarker.selected = true;
     dispatch(setDrawerOpen(true));
     dispatch(setFilterPanelOpen(false));
     dispatch(setSelectedMarker(capsMarker));
-  };
-
-  const changeActualMarkerSelected = (marker) => {
-    actualMarkerSelected.selected = false;
-    marker.selected = true;
-    setActualMarkerSelected(marker);
   };
 
   return (

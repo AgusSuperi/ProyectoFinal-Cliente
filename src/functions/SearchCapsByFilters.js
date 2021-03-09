@@ -17,7 +17,7 @@ const SearchCapsByFilters = async (
   const markers = await GetWithBody(data, "/medicalcenters/filter", enqueueSnackbar);
   if (!markers.length) {
     enqueueSnackbar("No se encontraron resultados", {
-      variant: "warning",
+      variant: "info",
     });
   }
   dispatch(setMarkers(markers));

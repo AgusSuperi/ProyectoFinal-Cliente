@@ -1,10 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
 export const useStyles = makeStyles(() => ({
-  infoContainer: {
-    width: "100%",
-    marginTop: "25px",
-  },
   firstStep: {
     color: "gray",
   },
@@ -12,19 +8,14 @@ export const useStyles = makeStyles(() => ({
     marginTop: "30px",
     color: "gray",
   },
-  listItem: {
-    "&:hover": {
-      backgroundColor: "#D8D8D8",
-    },
-  },
   list: {
-    marginTop: "20px",
-  },
-  root: {
-    marginTop: "30px",
+    marginTop: "10px",
   },
   title: {
     marginBottom: "25px",
+  },
+  specialityTitle:{
+    color: "gray"
   },
   wrapIcon: {
     verticalAlign: "middle",
