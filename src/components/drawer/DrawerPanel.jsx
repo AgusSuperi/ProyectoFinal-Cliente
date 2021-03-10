@@ -34,7 +34,7 @@ const DrawerPanel = () => {
           paper: classes.drawerPaper,
         }}
       >
-        <FilterPanel />
+        {filterPanelOpen && <FilterPanel />}
         <SelectedCapsInformation />
       </Drawer>
     );
