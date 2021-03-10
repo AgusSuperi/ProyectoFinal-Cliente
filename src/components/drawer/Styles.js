@@ -7,33 +7,11 @@ export const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     flexShrink: 0,
   },
-  bottomDrawerCollapsed: {
-    height: "50%",
-    width: "100%",
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-    zIndex: 2,
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "white",
-  },
-  bottomDrawerExpanded: {
-    height: "85%",
-    width: "100%",
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-    zIndex: 2,
-    display: "flex",
-    flexDirection: "column",
-    backgroundColor: "white",
-  },
   drawerPaper: {
     width: drawerWidth,
   },
   capsInformationContainer: {
-    overflow: "auto"
+    overflow: "auto",
   },
   drawerHeader: {
     display: "flex",
@@ -41,9 +19,6 @@ export const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
-  },
-  drawerContainer: {
-    overflow: "auto",
   },
   imageContainerLargeScreen: {
     width: "100%",

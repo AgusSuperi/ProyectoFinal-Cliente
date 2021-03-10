@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid, Typography } from "@material-ui/core";
+import { Checkbox, FormControl, FormControlLabel, FormGroup, Grid } from "@material-ui/core";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { useStyles } from "./Styles";
+import "./Styles.css";
 
 export default function CheckBoxList({ title, items, selectedItems, setSelectedItems, handleUpdateList }) {
-  const classes = useStyles();
   const [itemsToShow, setItemsToShow] = useState(5);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -24,9 +23,9 @@ export default function CheckBoxList({ title, items, selectedItems, setSelectedI
   };
 
   return (
-    <div className={classes.root}>
-      <FormControl className={classes.formControl}>
-        <Typography className={classes.formLabel}>{title}</Typography>
+    <div className="formControllContainer">
+      <FormControl>
+        <label className="formLabel">{title}</label>
         <FormGroup>
           {(items ? items.slice(0, itemsToShow) : []).map((item, value) => (
             <FormControlLabel
@@ -47,17 +46,13 @@ export default function CheckBoxList({ title, items, selectedItems, setSelectedI
           <span className="btn btn-primary" onClick={handleShowMoreOrLess}>
             {isExpanded ? (
               <Grid container alignItems="center">
-                <Typography variant="subtitle1" className={classes.showMoreOrLessText}>
-                  Ver menos
-                </Typography>
-                <ExpandLessIcon className={classes.showMoreOrLessIcon} />
+                <label className="moreOrLessLabel">Ver menos</label>
+                <ExpandLessIcon className="moreOrLessIcon" />
               </Grid>
             ) : (
               <Grid container alignItems="center">
-                <Typography variant="subtitle1" className={classes.showMoreOrLessText}>
-                  Ver más
-                </Typography>
-                <ExpandMoreIcon className={classes.showMoreOrLessIcon} />
+                <label className="moreOrLessLabel">Ver más</label>
+                <ExpandMoreIcon className="moreOrLessIcon" />
               </Grid>
             )}
           </span>

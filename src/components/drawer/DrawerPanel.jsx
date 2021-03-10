@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { ClickAwayListener, Drawer } from "@material-ui/core";
+import { Drawer } from "@material-ui/core";
 import { useStyles } from "./Styles";
 import FilterPanel from "../filters/FilterPanel";
 import SelectedCapsInformation from "./SelectedCapsInformation";
 import ScreenSizes from "../../utils/screenSizeValues/ScreenSizeValues";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ExpandMobileDrawerButton from "../button/ExpandMobileDrawerButton";
-import { closeDrawer } from "../../actions/DrawerActions";
-import { setSelectedMarker } from "../../actions/MapActions";
+import CloseBottomDrawerButton from "../button/CloseBottomDrawerButton";
+import "./Styles.css";
 
 const DrawerPanel = () => {
   const classes = useStyles();
@@ -16,12 +16,6 @@ const DrawerPanel = () => {
   const windowWidth = useSelector((state) => state.window.windowWidth);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
   const [drawerIsExpanded, setDrawerIsExpanded] = useState(false);
-  const dispatch = useDispatch();
-
-  const HandleCloseBottomDrawer = () => {
-    dispatch(setSelectedMarker(""));
-    dispatch(closeDrawer());
-  };
 
   if (windowWidth > ScreenSizes.Small) {
     return (
@@ -40,16 +34,15 @@ const DrawerPanel = () => {
     );
   } else if (selectedMarker || filterPanelOpen) {
     return (
-      <ClickAwayListener onClickAway={HandleCloseBottomDrawer}>
-        <div className={drawerIsExpanded ? classes.bottomDrawerExpanded : classes.bottomDrawerCollapsed}>
-          <ExpandMobileDrawerButton
-            setDrawerIsExpanded={setDrawerIsExpanded}
-            drawerIsExpanded={drawerIsExpanded}
-          />
-          <FilterPanel />
-          <SelectedCapsInformation />
-        </div>
-      </ClickAwayListener>
+      <div className={drawerIsExpanded ? "bottomDrawerExpanded" : "bottomDrawerCollapsed"}>
+        <ExpandMobileDrawerButton
+          setDrawerIsExpanded={setDrawerIsExpanded}
+          drawerIsExpanded={drawerIsExpanded}
+        />
+        <CloseBottomDrawerButton />
+        <FilterPanel />
+        <SelectedCapsInformation />
+      </div>
     );
   } else {
     return null;

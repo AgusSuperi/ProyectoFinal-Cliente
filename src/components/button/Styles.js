@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { makeStyles, Menu, MenuItem, Tooltip, withStyles } from "@material-ui/core";
 import { drawerWidth } from "../drawer/Styles";
 
@@ -31,10 +31,15 @@ export const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
-  MobileDrawerButton: {
+  ExpandMobileDrawer: {
     position: "absolute",
     top: 0,
-    right: 0
+    right: 45,
+  },
+  CloseMobileDrawer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
   },
   DrawerButton: {
     top: "100px",
@@ -47,7 +52,7 @@ export const useStyles = makeStyles((theme) => ({
     right: "15px",
     position: "absolute",
     zIndex: 2,
-    textAlign: "right"
+    textAlign: "right",
   },
   icon: {
     color: "white",
@@ -55,13 +60,13 @@ export const useStyles = makeStyles((theme) => ({
   menuButtonExtendedIcon: {
     marginLeft: theme.spacing(1),
   },
-  menuButtonContainer:{
+  menuButtonContainer: {
     backgroundColor: "black",
-    marginTop: "10px"
+    marginTop: "10px",
   },
-  listItemText:{
-    color: "white"
-  }
+  listItemText: {
+    color: "white",
+  },
 }));
 
 export const ButtonTooltip = withStyles({

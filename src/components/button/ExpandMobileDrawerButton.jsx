@@ -8,7 +8,7 @@ const ExpandMobileDrawerButton = ({ drawerIsExpanded, setDrawerIsExpanded }) => 
   const classes = useStyles();
 
   return (
-    <div className={classes.MobileDrawerButton}>
+    <div className={classes.ExpandMobileDrawer}>
       <Fab
         size="small"
         color="primary"

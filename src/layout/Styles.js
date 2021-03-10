@@ -15,14 +15,6 @@ export const useStyles = makeStyles((theme) => ({
   dialogContent: {
     textAlign: "center",
   },
-  dialogTitle: {
-    fontFamily: "'roboto'",
-    marginLeft: "15px",
-    marginTop: "10px",
-    marginBottom: "10px",
-    fontSize: "25px",
-    textAlign: "center",
-  },
   dialogText: {
     fontFamily: "roboto",
     textAlign: "center",
@@ -37,13 +29,14 @@ export const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     margin: "10px",
   },
-  dialogButton: {
-    marginLeft: "10px",
-    marginRight: "10px",
-  },
-  title:{
-    textAlign: "center",
-    marginTop: "10px",
-    fontSize: "23px"
-  }
 }));
+
+export const dialogTitle = {
+  textAlign: "center",
+  fontSize: "23px",
+  marginTop: "10px",
+};
+
+export const dialogButton = {
+  marginRight: "10px",
+};

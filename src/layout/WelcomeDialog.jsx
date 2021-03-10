@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Dialog, DialogContent, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import ScreenSizes from "../utils/screenSizeValues/ScreenSizeValues";
-import { useStyles } from "./Styles";
+import { dialogButton, dialogTitle, useStyles } from "./Styles";
 import hospitalMarker from "../assets/img/hospitalMarker.png";
 
 export default function WelcomeDialog({ setTourIsOpen }) {
@@ -18,7 +18,7 @@ export default function WelcomeDialog({ setTourIsOpen }) {
   return (
     <div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant="h6" style={dialogTitle}>
           ¡Bienvenido!
         </Typography>
         <DialogContent className={classes.dialogContent}>
@@ -40,7 +40,7 @@ export default function WelcomeDialog({ setTourIsOpen }) {
             size={windowWidth > ScreenSizes.Small ? "large" : "medium"}
             color="primary"
             variant="contained"
-            className={classes.dialogButton}
+            style={dialogButton}
           >
             Si quiero
           </Button>
@@ -49,7 +49,6 @@ export default function WelcomeDialog({ setTourIsOpen }) {
             size={windowWidth > ScreenSizes.Small ? "large" : "medium"}
             color="default"
             variant="outlined"
-            className={classes.dialogButton}
           >
             No, gracias
           </Button>

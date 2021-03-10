@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useStyles } from "./Styles";
 import { Button, Divider, Fab } from "@material-ui/core";
 import useSWR from "swr";
 import { useSnackbar } from "notistack";
@@ -9,10 +8,10 @@ import SearchCapsByFilters from "../../functions/SearchCapsByFilters";
 import RadioButtonList from "./RadioButtonList";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMarkers } from "../../actions/MapActions";
+import "./Styles.css";
 
 const FilterPanel = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
   const { data: markers } = useSWR("/medicalcenters");
   const filterPanelOpen = useSelector((state) => state.drawer.filterPanelOpen);
   const windowWidth = useSelector((state) => state.window.windowWidth);
@@ -43,69 +42,62 @@ const FilterPanel = () => {
     HandleResetMarkers();
   };
 
-  return (
-    <>
-      {filterPanelOpen ? (
-        <>
-          <div
-            className={
-              windowWidth > ScreenSizes.Small
-                ? classes.buttonContainerLargeScreen
-                : classes.buttonContainerSmallScreen
+  if (filterPanelOpen) {
+    return (
+      <>
+        <div
+          className={
+            windowWidth > ScreenSizes.Small ? "buttonContainerLargeScreen" : "buttonContainerSmallScreen"
+          }
+        >
+          <Fab
+            variant="extended"
+            size="medium"
+            color="primary"
+            onClick={() =>
+              SearchCapsByFilters(
+                selectedFilterOpeningHours,
+                selectedNeighborhoods,
+                selectedSpecialities,
+                dispatch,
+                enqueueSnackbar
+              )
             }
           >
-            <Fab
-              variant="extended"
-              size="medium"
-              color="primary"
-              aria-label="add"
-              onClick={() =>
-                SearchCapsByFilters(
-                  selectedFilterOpeningHours,
-                  selectedNeighborhoods,
-                  selectedSpecialities,
-                  dispatch,
-                  enqueueSnackbar
-                )
-              }
-              className={classes.searchButton}
-            >
-              Buscar
-            </Fab>
-            <Button onClick={() => HandleClearFilters()}>Limpiar</Button>
-          </div>
-          <div
-            className={
-              windowWidth > ScreenSizes.Small ? classes.containerLargeScreen : classes.containerSmallScreen
-            }
-          >
-            <RadioButtonList
-              title="Horarios"
-              items={filterOpeningHours}
-              selectedItem={selectedFilterOpeningHours}
-              setSelectedItem={setSelectedFilterOpeningHours}
-            />
-            <Divider />
-            <CheckBoxList
-              title="Especialidades"
-              items={specialities}
-              selectedItems={selectedSpecialities}
-              setSelectedItems={setSelectedSpecialities}
-              handleUpdateList={HandleUpdateList}
-            />
-            <Divider />
-            <CheckBoxList
-              title="Barrios"
-              items={neighborhoods}
-              selectedItems={selectedNeighborhoods}
-              setSelectedItems={setSelectedNeighborhoods}
-              handleUpdateList={HandleUpdateList}
-            />
-          </div>
-        </>
-      ) : undefined}
-    </>
-  );
+            Buscar
+          </Fab>
+          <Button style={{ marginLeft: "10px" }} onClick={() => HandleClearFilters()}>
+            Limpiar
+          </Button>
+        </div>
+        <div className={windowWidth > ScreenSizes.Small ? "containerLargeScreen" : "containerSmallScreen"}>
+          <RadioButtonList
+            title="Horarios"
+            items={filterOpeningHours}
+            selectedItem={selectedFilterOpeningHours}
+            setSelectedItem={setSelectedFilterOpeningHours}
+          />
+          <Divider />
+          <CheckBoxList
+            title="Especialidades"
+            items={specialities}
+            selectedItems={selectedSpecialities}
+            setSelectedItems={setSelectedSpecialities}
+            handleUpdateList={HandleUpdateList}
+          />
+          <Divider />
+          <CheckBoxList
+            title="Barrios"
+            items={neighborhoods}
+            selectedItems={selectedNeighborhoods}
+            setSelectedItems={setSelectedNeighborhoods}
+            handleUpdateList={HandleUpdateList}
+          />
+        </div>
+      </>
+    );
+  }
+  return null;
 };
 
 export default FilterPanel;
