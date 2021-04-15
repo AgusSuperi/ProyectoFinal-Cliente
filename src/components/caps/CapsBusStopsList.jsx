@@ -12,6 +12,7 @@ const CapsBusStopsList = () => {
   const classes = useStyles();
   const [closestBuses, setClosestBuses] = useState([]);
   const [selectedBus, setSelectedBus] = useState({});
+  const [selectedBusStop, setSelectedBusStop] = useState(-1);
   const [radius, setRadius] = useState(1);
   const userMarker = useSelector((state) => state.map.userMarker);
   const selectedMarker = useSelector((state) => state.map.selectedMarker);
@@ -37,8 +38,9 @@ const CapsBusStopsList = () => {
     }
   }, [dispatch, userMarker, selectedBus]);
 
-  const handleShowBusStops = (closestBus) => {
+  const handleShowBusStops = (event, value, closestBus) => {
     if (selectedMarker) {
+      setSelectedBusStop(value);
       setSelectedBus(closestBus);
       dispatch(setMarkers([selectedMarker]));
       dispatch(
@@ -78,8 +80,8 @@ const CapsBusStopsList = () => {
               <ListItem
                 key={value}
                 button
-                onClick={() => handleShowBusStops(closestBus)}
-                className={classes.listItem}
+                selected={selectedBusStop === value}
+                onClick={(event) => handleShowBusStops(event, value, closestBus)}
               >
                 <ListItemIcon>
                   <BusIcon color="primary" />
